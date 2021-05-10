@@ -10,15 +10,6 @@
 <link type="text/css" rel="stylesheet" href="${CONTEXT_PATH}/css/member/find.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 <script type="text/javascript" src="${CONTEXT_PATH}/js/member/find.js"></script>
-<script type="text/javascript">
-function mobilePopup() {
-     // window.name = "부모창 이름"; 
-     window.name = "parentForm";
-     // window.open("open할 window", "자식창 이름", "팝업창 옵션");
-     window.open("${CONTEXT_PATH}/member/mobilePopup.jsp",
-             "childForm", "width=570, height=350, resizable = no, scrollbars = no");    
-}
-</script>
 </head>
   
   
@@ -42,27 +33,33 @@ function mobilePopup() {
 <div id="contents_box" align="center">
 <div class="view-width">
 	<h1 align="center">아이디 찾기</h1>
-	<form action="${CONTEXT_PATH}/member/controller?action=memberFindId" method="post">
+	<form action="${CONTEXT_PATH}/seller/controller?action=sellerFindId" method="post">
 	<table id="find-account-tbl">
 		<tr>
 			<th>이름</th>
-			<td><input type="text" placeholder="고객님의 이름을 입력해주세요" id="name" name="name" required="required"/></td>
+			<td><input type="text" placeholder="고객님의 이름을 입력해주세요" id="name" name="name" /></td>
 		</tr>
 		<tr>
 			<th>이메일</th>
 			<td>
-				<input type="text" placeholder="가입 시 등록하신 이메일 주소를 입력해주세요" id="email" name="email" required="required"/>
-				<input type="button" value="인증번호" id="mobile_button" name="mobile_button" onclick="mobilePopup();"/>
+				<input type="text" placeholder="가입 시 등록하신 이메일 주소를 입력해주세요" id="email" name="email" />
+				<input type="button" value="인증번호" id="email_button" name="email_button" onclick="mobilePopup();"/>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<span id="emailNumResult1" class="inputResult"></span>
 			</td>
 		</tr>
 		<tr>
 			<th>인증번호</th>
 			<td>
-				<input type="text" placeholder="인증번호 입력" id="mobileNum" name="mobileNum" readonly="readonly" required="required"/>
+				<input type="text" placeholder="인증번호 입력" id="mobileNum" name="mobileNum" readonly="readonly" />
 			</td>
 		</tr>
 		<tr>
-			<td colspan="2" style="text-align: center;"><input type="submit" value="찾기" id="check_submit"/></td>
+			<td colspan="2" style="text-align: center;"><input type="submit" value="찾기" id="check_submit" onclick="return inputCheck()"/></td>
 		</tr>
 	</table>
 	</form>

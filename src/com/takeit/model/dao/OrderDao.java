@@ -92,7 +92,6 @@ public class OrderDao {
 	 * @param order 주문객체
 	 */
 	public void insertOrderDetail(Connection conn, Order order) throws CommonException {
-		System.out.println(order);
 		String sql = "INSERT INTO Order_Detail VALUES(?, ?, ?, ?) ";
 		PreparedStatement stmt = null;
 		try {
@@ -126,9 +125,9 @@ public class OrderDao {
 	 */
 	public void selectSellerOrderList(Connection conn, String sellerId, ArrayList<Order> orderList) throws CommonException {
 		String sql = "SELECT * "
-				+ "FROM ITEM JOIN ORDER_DETAIL USING(ITEM_NO) JOIN ORDERS USING(ORDER_NO) JOIN SHIPPING USING(SHIP_STATUS_CODE) "
+				+ "FROM ITEM JOIN ORDER_DETAIL USING(ITEM_NO) JOIN ORDERS USING(ORDER_NO) LEFT JOIN SHIPPING USING(SHIP_STATUS_CODE) "
 				+ "WHERE ITEM.SELLER_ID = ? "
-				+ "ORDER BY ORDER_NO DESC ";
+				+ "ORDER BY SUBSTR(ORDER_NO, 2) DESC ";
 		
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
@@ -196,9 +195,9 @@ public class OrderDao {
 	 */
 	public void selectMemberOrderList(Connection conn, String memberId, ArrayList<Order> orderList) throws CommonException {
 		String sql = "SELECT * "
-				+ "FROM ORDERS JOIN SHIPPING USING(SHIP_STATUS_CODE) JOIN ORDER_DETAIL USING(ORDER_NO) JOIN ITEM USING(ITEM_NO) JOIN SELLER USING(SELLER_ID) "
+				+ "FROM ORDERS LEFT JOIN SHIPPING USING(SHIP_STATUS_CODE) JOIN ORDER_DETAIL USING(ORDER_NO) JOIN ITEM USING(ITEM_NO) JOIN SELLER USING(SELLER_ID) "
 				+ "WHERE ORDERS.MEMBER_ID = ? "
-				+ "ORDER BY ORDER_NO DESC ";
+				+ "ORDER BY SUBSTR(ORDER_NO, 2) DESC ";
 		
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
@@ -396,9 +395,9 @@ public class OrderDao {
 					orderDetail.setItemTakeit(rs.getString("item_takeit"));
 					orderDetail.setItemName(rs.getString("item_name"));
 					orderDetail.setItemImg(rs.getString("item_img"));
+					orderDetail.setSellerId(rs.getString("seller_id"));
 				}
 			}
-			
 			
 		} catch (Exception e) {
 			e.printStackTrace();

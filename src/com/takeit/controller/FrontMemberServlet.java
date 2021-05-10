@@ -19,6 +19,9 @@ import com.takeit.model.dto.MessageEntity;
 
 /**
  * 일반 회원관리 컨트롤러
+ * @author  임우진
+ * @since   jdk1.8
+ * @version v2.0
  */
 @WebServlet(urlPatterns = {"/member/controller"}, loadOnStartup = 1)
 public class FrontMemberServlet extends HttpServlet {
@@ -34,6 +37,8 @@ public class FrontMemberServlet extends HttpServlet {
 		System.out.println("[loadOnStartup]CONTEXT_PATH : " + CONTEXT_PATH);
 		application.setAttribute("CONTEXT_PATH", CONTEXT_PATH);
 		application.setAttribute("takeitScope", "all");
+		String imgPath="C:/student_ucamp33/apps_down/05.tomcat/apache-tomcat-8.5.64/webapps";
+		application.setAttribute("imgPath", imgPath);
 	}
 	
 	protected void process(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -44,6 +49,9 @@ public class FrontMemberServlet extends HttpServlet {
 		String action = request.getParameter("action");
 		
 		switch(action) {
+		case "memberInputForm":
+			memberInputForm(request, response);
+			break;
 		case "memberInput":
 			memberInput(request, response);
 			break;
@@ -65,6 +73,15 @@ public class FrontMemberServlet extends HttpServlet {
 		case "memberEmailChk":
 			memberEmailChk(request, response);
 			break;
+		case "kakaoLogin":
+			kakaoLogin(request, response);
+			break;
+		case "kakaoMemberInputForm":
+			kakaoMemberInputForm(request, response);
+			break;
+		default:
+			response.sendRedirect(CONTEXT_PATH + "/index");
+			break;
 		}
 	}
 	
@@ -76,6 +93,16 @@ public class FrontMemberServlet extends HttpServlet {
 		process(request, response);
 	}
 
+
+	/**
+	 * 회원가입 폼
+	 */
+	protected void memberInputForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("작동확인 : memberInputForm");
+		
+		request.getRequestDispatcher("/member/memberInput.jsp").forward(request, response);
+	}
+	
 	/**
 	 * 회원가입 
 	 */
@@ -296,7 +323,7 @@ public class FrontMemberServlet extends HttpServlet {
 	protected void memberIdChk(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String memberId = request.getParameter("memberId");
-		
+		System.out.println("chk"+memberId);
 		memberId = memberId.trim();
 		
 		MemberBiz biz = new MemberBiz();
@@ -340,5 +367,47 @@ public class FrontMemberServlet extends HttpServlet {
 			request.setAttribute("message", message);
 			rd.forward(request, response);
 		}
+	}
+	
+	protected void kakaoLogin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String memberId = request.getParameter("kakaoId");
+		
+		System.out.println("작동확인 : kakaoLogin");
+		RequestDispatcher rd = request.getRequestDispatcher("/message.jsp");
+		
+		Member dto = new Member();
+		MemberBiz biz = new MemberBiz();
+		dto.setMemberId(memberId);
+		
+		try {
+			biz.kakaoLogin(dto);
+			if(dto.getAddress() != null) {
+				HttpSession session = request.getSession(true);
+				session.setAttribute("memberId", memberId); 
+				session.setAttribute("dto", dto);
+				response.sendRedirect("/takeit/index");
+			}else {
+				MessageEntity message = new MessageEntity("error", 34);
+				message.setLinkTitle("뒤로가기");
+				message.setUrl("/takeit/member/memberLogin.jsp");
+				request.setAttribute("message", message);
+				rd.forward(request, response);
+			}
+		} catch (CommonException e) {
+			MessageEntity message = e.getMessageEntity();
+			request.setAttribute("message", message);
+			rd.forward(request, response);
+		}
+	}
+	protected void kakaoMemberInputForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String kakaoId = request.getParameter("kakaoIdInput");
+		System.out.println(kakaoId);
+		
+		String kakaoEmail = request.getParameter("kakaoEmail");
+		System.out.println(kakaoEmail);
+		request.setAttribute("kakaoId", kakaoId);
+		request.setAttribute("kakaoEmail", kakaoEmail);
+		
+		request.getRequestDispatcher("/loginapi/kakaoMemberInput.jsp").forward(request, response);
 	}
 }

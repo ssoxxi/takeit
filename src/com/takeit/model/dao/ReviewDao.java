@@ -17,9 +17,12 @@ import com.takeit.model.dto.Review;
 
 
 /**
+ * 후기
  * @author 김효원
- *
+ * @since jdk1.8
+ * @version v2.0
  */
+
 public class ReviewDao {
 	private static ReviewDao instance = new ReviewDao();
 	private ReviewDao() {}
@@ -72,7 +75,7 @@ public class ReviewDao {
 		JdbcTemplate.close(stmt);
 	}
 	/**
-	 * 내작성후기 전체목록
+	 * 회원작성후기 전체목록
 	 * @param con
 	 * @param ReviewList
 	 * @throws CommonException
@@ -155,7 +158,7 @@ public class ReviewDao {
 	}
 
 	/**
-	 * 내가 쓴 후기 상세조회
+	 * 회원후기 상세조회
 	 * @param conn
 	 * @param dto 후기
 	 */
@@ -202,7 +205,7 @@ public class ReviewDao {
 	 * @throws CommonException 
 	 */
 	public void updateReview (Connection conn, Review dto) throws CommonException{
-		String sql = "update review set  review_title=? ,review_contents=?,review_score=?where member_id=? ";
+		String sql = "update review set  review_title=? ,review_contents=? ,review_score=? where member_id=? and review_no=?";
 
 		PreparedStatement stmt = null;
 
@@ -212,6 +215,7 @@ public class ReviewDao {
 			stmt.setString(2, dto.getReviewContents());
 			stmt.setInt(3, dto.getReviewScore());
 			stmt.setString(4, dto.getMemberId());
+			stmt.setString(5, dto.getReviewNo());
 
 
 			int result =stmt.executeUpdate();
@@ -245,14 +249,17 @@ public class ReviewDao {
 		String sql = "delete from review where member_id=? and review_No=?";
 
 		PreparedStatement stmt = null;
-	
+				
 		try {
 			stmt = conn.prepareStatement(sql);
-			stmt.setString(1, reviewNo);
-			stmt.setString(2, memberId);
+			stmt.setString(1, memberId);
+			stmt.setString(2, reviewNo);
 
-			stmt.executeUpdate();
-
+			int rows = stmt.executeUpdate();
+			
+			if(rows ==0) {
+				throw new Exception();
+			}
 		}catch (Exception e) {
 			System.out.println(e.getMessage());
 			e.printStackTrace();

@@ -16,21 +16,22 @@
             window.close();
         }
 </script>
+<link type="text/css" rel="stylesheet" href="/takeit/css/member/find.css">
 </head>
-
-
 <body>
-	<table>
-		<tr>
-			<td>
-			    <input type="text" id="send" readonly="readonly"> 
-			    <input type="button" value="전달하기" onclick="getParentText()"><br>
-			</td>
-			<td>
-		    	<input type="button" value="인증번호받기" onclick="getMobileNum()">
-			</td>
-		</tr>
-	</table>
+<div id="popup">
+<table id="popup-table" >
+	<tr>
+		<td>
+		    <input type="text" id="send" class="popup" readonly="readonly"> 
+		    <input type="button" value="전달하기" class="popup popup-btn" onclick="getParentText()"><br>
+		</td>
+		<td>
+	    	<input type="button" value="인증번호받기" class="popup popup-btn" onclick="getMobileNum()">
+		</td>
+	</tr>
+</table>
+</div>
 </body>
 </html>
 

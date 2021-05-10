@@ -11,7 +11,7 @@
 		<span id="pipe">|</span>
 		<a href="/takeit/takeit/takeitController?action=takeitItemList&scope=all">잇거래</a>
 		<span id="pipe">|</span>
-		<a href="/takeit/boardController?action=boardList&boardCategory=1">공지사항</a>
+		<a href="/takeit/boardController?action=boardListPaging&boardCategory=1&goGroup=1">공지사항</a>
 	</div>
 	<div id="search-wrap">
 	<form action="/takeit/searchController?action=searchList" id="mainSearch" method="post">

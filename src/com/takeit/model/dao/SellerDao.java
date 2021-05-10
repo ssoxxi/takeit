@@ -4,18 +4,19 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import com.takeit.common.CommonException;
 import com.takeit.common.JdbcTemplate;
-import com.takeit.model.dto.Member;
 import com.takeit.model.dto.MessageEntity;
 import com.takeit.model.dto.Seller;
 import com.takeit.util.Utility;
 
 /**
- * 판매자회원 : DB접근
- * @author 임우진
- * 
+ * 일반 회원관리 컨트롤러
+ * @author  임우진
+ * @since   jdk1.8
+ * @version v2.0
  */
 public class SellerDao {
 
@@ -46,7 +47,7 @@ public class SellerDao {
 		stmt.setString(11, seller.getSellerNo());
 		stmt.setString(12, seller.getShopMobile());
 		stmt.setString(13, seller.getShopName());
-		stmt.setDouble(14, 5.0);
+		stmt.setDouble(14, 0.0);
 		stmt.setString(15, seller.getShopKakaoId());
 		stmt.setString(16, seller.getShopImg());
 		stmt.setString(17, seller.getShopCategoryNo());
@@ -191,7 +192,6 @@ public class SellerDao {
 	
 	/**
 	 * 아이디 중복체크
-	 * @throws CommonException 
 	 */
 	public boolean sellerIdChk(Connection con, String seller) throws CommonException {
 
@@ -224,7 +224,6 @@ public class SellerDao {
 
 	/**
 	 * 이메일 중복체크
-	 * @throws CommonException 
 	 */
 	public boolean sellerEmailChk(Connection con, String email) throws CommonException {
 		
@@ -257,7 +256,6 @@ public class SellerDao {
 
 	/**
 	 * 사업자등록번호 중복체크
-	 * @throws CommonException 
 	 */
 	public boolean sellerNoChk(Connection con, String sellerNo) throws CommonException {
 
@@ -290,7 +288,6 @@ public class SellerDao {
 	
 	/**
 	 * 상점명 중복체크
-	 * @throws CommonException 
 	 */
 	public boolean shopNameChk(Connection con, String shopName) throws CommonException {
 		
@@ -319,5 +316,35 @@ public class SellerDao {
 			JdbcTemplate.close(stmt);
 		}
 		return true;
+	}
+	
+	/**
+	 * 상점 카테고리 전체조회
+	 */
+	public void shopCategoryList(Connection conn, ArrayList<Seller> shopCategoryList) throws CommonException {
+	
+		String sql ="select * from seller s, shop_category c where s.shop_category_no = c.shop_category_no";
+		
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		
+		try {
+			stmt = conn.prepareStatement(sql);
+			rs = stmt.executeQuery();
+			Seller shopCate = null;
+			while (rs.next()) {
+				shopCate = new Seller();
+				shopCate.setShopCategoryNo(rs.getString("shop_category_no"));  
+				shopCate.setShopCategory(rs.getString("shop_category"));
+				shopCategoryList.add(shopCate);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			MessageEntity message = new MessageEntity("error", 0);
+			throw new CommonException(message);
+		} finally {
+			JdbcTemplate.close(rs);
+			JdbcTemplate.close(stmt);
+		}	
 	}
 }

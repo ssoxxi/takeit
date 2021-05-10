@@ -10,30 +10,6 @@
 <link type="text/css" rel="stylesheet" href="${CONTEXT_PATH}/css/member/input.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 <script type="text/javascript" src="/takeit/js/member/input.js"></script>	
-<script type="text/javascript">
-/* 우편번호 api */
-var goPopup = function() {
-	 var pop = window.open("${CONTEXT_PATH}/member/jusoPopup.jsp","pop","width=570,height=420, scrollbars=yes, resizable=yes");
-} 
-var jusoCallBack = function(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAddr, jibunAddr, zipNo){
-	 document.getElementById("postNo").value = zipNo; 
-	 document.getElementById("address").value = roadAddrPart1; 
-	 document.getElementById("addressDetail").value = addrDetail; 
-	 if(addressDetail.length>30){ 
-		alert('상세주소를 30자 이내로 입력해주세요.'); 
-		return; 
-	} 
-}
-
-/* 모바일 인증번호 팝업 */
-function mobilePopup() {
-    // window.name = "부모창 이름"; 
-    window.name = "parentForm";
-    // window.open("open할 window", "자식창 이름", "팝업창 옵션");
-    window.open("${CONTEXT_PATH}/member/mobilePopup.jsp",
-            "childForm", "width=570, height=350, resizable = no, scrollbars = no");  
-}
-</script>
 </head>
 
 
@@ -47,14 +23,10 @@ function mobilePopup() {
 	<!-- 로그인 후 메뉴 -->
 	<jsp:include page="/common/after_login_menu.jsp"></jsp:include>	
 </c:if>
-
-
 <!-- logo.jsp 삽입 -->
 <jsp:include page="/common/logo.jsp"></jsp:include>
-
 <!-- 네비게이션 -->
 <jsp:include page="/common/navigation.jsp"></jsp:include>
-
 <!-- 내용 -->
 <div id="contents_box" align="center">
 <table>
@@ -71,7 +43,7 @@ function mobilePopup() {
 			<td>아이디<span class="star"> *</span></td>
 			<td>
 				<input type="text" placeholder="아이디를 입력해주세요." id="memberId"  name="memberId" />
-				<input type="button" value="중복확인" id="id_button" onclick="idCheck()"/>
+				<input type="button" value="중복확인" id="id_button" name="id_button" onclick="idCheck()"/>
 			</td>
 		</tr>
 		<tr>
@@ -100,6 +72,7 @@ function mobilePopup() {
 			<td>
 				<input type="password" placeholder="비밀번호를 한번 더 입력해주세요." id="pwChk" name="pwChk" />
 				<input type="checkbox" id="pwCheckbox" name="pwCheckbox" onclick="pwCheckbox_onclick()"/>
+				<label for="pwCheckbox"></label>
 			</td>
 		</tr>
 		<tr>
@@ -151,7 +124,7 @@ function mobilePopup() {
 			<td>이메일<span class="star"> *</span></td>
 			<td>
 				<input type="text" placeholder="이메일을 입력해주세요." id="email" name="email" />
-				<input type="button" value="중복확인" id="email_button" onclick="emailCheck()"/>
+				<input type="button" value="중복확인" id="email_button" name="email_button" onclick="emailCheck()"/>
 			</td>
 		</tr>
 		<tr>
@@ -192,7 +165,7 @@ function mobilePopup() {
 		<tr>
 			<td>상세주소<span class="star"> *</span></td>
 			<td>
-				<input type="text" placeholder="상세주소를 입력해주세요." id="addressDetail" name="addressDetail"/>
+				<input type="text" placeholder="상세주소를 입력해주세요." id="addressDetail" name="addressDetail" readonly="readonly"/>
 			</td>
 		</tr>
 		<tr>

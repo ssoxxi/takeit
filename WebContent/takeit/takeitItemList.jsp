@@ -13,9 +13,6 @@
 <link type="text/css" rel="stylesheet" href="/takeit/css/link.css">
 <link type="text/css" rel="stylesheet" href="/takeit/css/takeit.css">
 <link type="text/css" rel="stylesheet" href="/takeit/css/item.css">
-
-<style>
-</style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 <script type="text/javascript">
 	function getTakeitTime() {
@@ -34,7 +31,7 @@
 			
 			takeitTimeElement.innerHTML = "남은시간 : " +d1 + "일 "+ h1+"시간 "+m1+"분 "+s1 + "초"
 			
-			if (d1 <= 3) {
+			if (d1 < 3) {
 				console.log("d1="+d1);
 				$($(".takeitTime").get(i)).css("color", "red");
 			}
@@ -71,83 +68,83 @@
 <jsp:include page="/common/logo.jsp"></jsp:include>
 <!-- 네비게이션 -->
 <jsp:include page="/common/navigation.jsp"></jsp:include>
-
-<h3 style="width:fit-content; margin: 20px auto; font-size: 30px;">
-<select id="selectScope" name="scope" style="position:relative; left:-150px; height:35px;width:150px;">
-<c:choose >
-	<c:when test="${not empty applicationScope.takeitScope and applicationScope.takeitScope == 'all'}">
-		<option value="all" selected="selected">전체</option>
-		<option value="my">내 지역</option>
-		
-	</c:when>
-	<c:when test="${not empty applicationScope.takeitScope and applicationScope.takeitScope == 'my'}">
-		<option value="all">전체</option>
-		<option value="my" selected="selected">내 지역</option>
-	</c:when>
-</c:choose>
-</select>	
-잇거래</h3>
+<div style="width: 950px; margin: 0 auto;">
+	<div id="title">
+		<h3 >잇거래</h3>
+	</div>
+	<div>
+		<select id="selectScope" name="scope">
+		<c:choose >
+			<c:when test="${not empty applicationScope.takeitScope and applicationScope.takeitScope == 'all'}">
+				<option value="all" selected="selected">전체</option>
+				<option value="my">내 지역</option>
+				
+			</c:when>
+			<c:when test="${not empty applicationScope.takeitScope and applicationScope.takeitScope == 'my'}">
+				<option value="all">전체</option>
+				<option value="my" selected="selected">내 지역</option>
+			</c:when>
+		</c:choose>
+		</select>	
+	</div>
+</div>
 
  <div class="item_wrap" style="display: flex;">
- 	<%
-	int i = 0;
-	%>
 	<div class="takeit_item_wrap">
-	<c:forEach items="${takeitItemList}" var="dto"> 
-	<%
-		i++;
-		if(i % 3 != 0){ //3의 배수가 아닐 때(flex)
-	%>
+	<c:forEach items="${takeitItemList}" var="takeitItem" begin="${startRow }" end="${endRow}" > 
 		<ul class="takeit_item" style="display: inline-block;">
 
 			<li style="width: 250px;">
-				<span class="takeitTime takeit-listTime blink" data-takeittime="${dto.takeitDate}"></span><br>
-				<a href="/takeit/takeit/takeitController?action=takeitItemDetail&itemNo=${dto.itemNo }">
-					<img id="takeitImg" alt="${dto.itemImg}" src="/takeit/img/item/${dto.itemImg}">
+				<span class="takeitTime takeit-listTime blink" data-takeittime="${takeitItem.takeitDate}"></span><br>
+				<a href="/takeit/takeit/takeitController?action=takeitItemDetail&itemNo=${takeitItem.itemNo}&shopLocCode=${takeitItem.shopLocCode}">
+					<img id="takeitImg" alt="${takeitItem.itemImg}" src="/takeit/img/item/${takeitItem.itemImg}">
 				</a>
-				<span class="item-fresh">신선도${100-(dto.discRate)}%</span>
+				<span class="item-fresh">신선도${100-(takeitItem.discRate)}%</span>
 			</li>
-			<fmt:formatNumber var="itemPrice" value="${dto.itemPrice}" type="number"/>
-			<fmt:formatNumber var="discPrice" value="${dto.itemPrice * (100-dto.discRate) / 100}" type="number"/>
-			<fmt:parseNumber  var="intPrice" value="${(dto.itemPrice * (100-dto.discRate) / 100)/1000}" integerOnly="true"/>
+			<fmt:formatNumber var="itemPrice" value="${takeitItem.itemPrice}" type="number"/>
+			<fmt:formatNumber var="discPrice" value="${takeitItem.itemPrice * (100-takeitItem.discRate) / 100}" type="number"/>
+			<fmt:parseNumber  var="intPrice" value="${(takeitItem.itemPrice * (100-takeitItem.discRate) / 100)/1000}" integerOnly="true"/>
 			<fmt:formatNumber var="takeitItemPrice" value="${intPrice*1000}" type="number"/>
-			<fmt:formatNumber var="itemDiscRate" value="${dto.discRate / 100}" type="percent"/>
-			<fmt:formatNumber var="takeitDisc" value="${(dto.itemPrice * (100-dto.discRate) / 100) - intPrice*1000 }" type="number"/>
-			<li id="itemTitle">${dto.itemName}</li>
+			<fmt:formatNumber var="itemDiscRate" value="${takeitItem.discRate / 100}" type="percent"/>
+			<fmt:formatNumber var="takeitDisc" value="${(takeitItem.itemPrice * (100-takeitItem.discRate) / 100) - intPrice*1000 }" type="number"/>
+			<li id="itemTitle">${takeitItem.itemName}</li>
 			<li id="discRate">(할인 ${itemDiscRate}+${takeitDisc}원)</li>
 			<li id="salePrice">${takeitItemPrice}원</li>
-			<li id="price">${dto.itemPrice}원</li>
+			<li id="price">${takeitItem.itemPrice}원</li>
 		</ul>
-
-		<%
-		} else if(i % 3 == 0){ //3의 배수일 때
-	%>
-		<ul class="takeit_item" style="display: inline-block;">
-			<li style="width: 250px;">
-				<span class="takeitTime takeit-listTime blink" data-takeittime="${dto.takeitDate}"></span><br>
-				<a href="/takeit/takeit/takeitController?action=takeitItemDetail&itemNo=${dto.itemNo }">
-					<img id="takeitImg" alt="${dto.itemImg}" src="/takeit/img/item/${dto.itemImg}">
-				</a>
-				<span class="item-fresh">신선도${100-(dto.discRate)}%</span>
-			</li>
-			<fmt:formatNumber var="itemPrice" value="${dto.itemPrice}" type="number"/>
-			<fmt:formatNumber var="discPrice" value="${dto.itemPrice * (100-dto.discRate) / 100}" type="number"/>
-			<fmt:parseNumber  var="intPrice" value="${(dto.itemPrice * (100-dto.discRate) / 100)/1000}" integerOnly="true"/>
-			<fmt:formatNumber var="takeitItemPrice" value="${intPrice*1000}" type="number"/>
-			<fmt:formatNumber var="itemDiscRate" value="${dto.discRate / 100}" type="percent"/>
-			<fmt:formatNumber var="takeitDisc" value="${(dto.itemPrice * (100-dto.discRate) / 100) - intPrice*1000 }" type="number"/>
-			<li id="itemTitle">${dto.itemName}</li>
-			<li id="discRate">(할인 ${itemDiscRate}+${takeitDisc}원)</li>
-			<li id="salePrice">${takeitItemPrice}원</li>
-			<li id="price">${dto.itemPrice}원</li>
-		</ul>
-	<%
-		i--;
-		}
-	%>
 	</c:forEach>
 	</div>
 </div>
+
+<!-- 페이징 -->
+<div class="view-width">
+	<div id="paging">
+		<c:choose>
+			<c:when test="${whereGroup > 1 }">
+				<span><a href="/takeit/takeit/takeitController?action=takeitItemList&goGroup=1">[처음]</a></span>
+				<span><a href="/takeit/takeit/takeitController?action=takeitItemList&goGroup=${priorGroup}">[이전]</a></span>
+			</c:when>
+			<c:otherwise>
+					<span>[처음]</span>
+					<span>[이전]</span>
+				</c:otherwise>
+		</c:choose>
+		<c:forEach var="i" begin="${startPageNo}" end="${endPageNo}" step="1">
+			<a href="/takeit/takeit/takeitController?action=takeitItemList&go=${i}">${i}</a>
+		</c:forEach>
+		<c:choose>
+			<c:when test="${whereGroup < totalGroup}">
+				<span><a href="/takeit/takeit/takeitController?action=takeitItemList&goGroup=${nextGroup}">[다음]</a></span>
+				<span><a href="/takeit/takeit/takeitController?action=takeitItemList&goGroup=${totalGroup}">[마지막]</a></span>
+			</c:when>
+			<c:otherwise>
+					<span>[다음]</span>
+					<span>[마지막]</span>
+				</c:otherwise>
+		</c:choose>
+	</div>
+</div>
+
 
 <!-- floating Banner -->
 <jsp:include page="/common/floatingBanner.jsp"></jsp:include>

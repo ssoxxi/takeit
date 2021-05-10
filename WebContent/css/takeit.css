@@ -21,6 +21,11 @@
 	box-shadow: 3px 3px grey;
 } 
 /**takeit list*/
+#selectScope{
+	height: 35px;
+	width: 150px;
+	font-size: 18px;
+}
 .takeit_item_wrap{
 	width: 1050px;
 	justify-content: space-between;
@@ -231,4 +236,75 @@ input[type="number"]::-webkit-outer-spin-button,
 input[type="number"]::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
+}
+/**takeit Management*/
+#takeitMgr-view-width{
+	width: 1150px;
+	margin: 0 auto;
+}
+#takeitManage-wrap{
+	margin-left: 10px; 
+}
+.takeitMgr-title{
+	width: fit-content;
+	margin: 0 auto;
+	font-size: 20px;
+}
+.takeitMgr-scroll{
+	width: 900px;
+	height: 600px;
+	overflow: scroll;
+}
+.takeitMgr-del-btn{
+	padding: 3px 5px;
+	border-radius: 20px;
+	border: 1px solid grey;
+	font-size: 15px;
+	font-weight: 500;
+	color: #35363a;
+	border: solid 1px #8D959C;
+	background-color: #fff;
+	vertical-align: middle;
+}
+.takeitMgr-del-btn:hover{
+	background-color: #5a7d59;
+	color: #fff;
+	font-weight: 600;
+	cursor: pointer;
+	
+}
+.takeitMgr-table, #takeitMgr-tr>th,
+.takeitMgr-table>th, .takeitMgr-table>td{
+	border: 1px solid grey;
+	border-collapse: collapse;
+}
+.takeitMgr-table>td{
+	height: 55px;
+	line-height: 55px;
+	vertical-align: middle;
+}
+#takeitMgr-tr{
+	position: absolute;
+    top: 313px;
+	border-collapse: collapse;
+}
+
+.shopLocDelete_btn{
+	text-align: center;
+	width: 170px;
+	height: 45px;
+	line-height: 45px;
+	font-size:20px;
+	font-weight: 500;
+	color: #35363a;
+	border: solid 1px #8D959C;
+	background-color: #fff;
+	margin-right: 5px;
+	margin-left: 137px;
+}
+.shopLocDelete_btn:hover{
+	background-color: #5a7d59;
+	color: #fff;
+	font-weight: 600;
+	cursor: pointer;
 }

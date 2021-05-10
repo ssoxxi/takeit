@@ -7,6 +7,7 @@
 	margin: 0 auto;
 	padding: 5px;
 }
+
 #itemadd_table th{
 	
 	width: 100px;
@@ -30,7 +31,6 @@
 	
 }
 
-
 .itemaddBtn:hover{
 	background-color: #5a7d59;
 	color: #fff;
@@ -51,9 +51,59 @@
 	border: solid 1px #8D959C;
 	background-color: #fff;
 }
+
 #mypage_btn:hover{
 	background-color: #5a7d59;
 	color: #fff;
 	font-weight: 600;
 	cursor: pointer;
+}
+
+.myPage_menu_aside {
+	width: 200px;
+	height: 600px;
+	float: left;
+	margin-top: 100px;
+}
+
+.myPage_menu_aside ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 200px;
+    background-color: #f1f1f1;
+}
+
+.myPage_menu_aside li a {
+    display: block;
+    color: #001;
+    padding: 8px 16px;
+    text-decoration: none;
+}
+
+.myPage_menu_aside h3.active {
+    background-color: #5a7d59;
+    color: white;
+}
+
+.myPage_menu_aside li a:hover:not(.active) {
+    background-color: #5a7d59;
+    color: white;
+} 
+
+/**사이드바*/
+.side-menu{
+	margin-right: 50px;
+}
+
+#container{
+	display: flex;
+}
+
+#imgNotice{
+	font-size: 2px;
+	color: #42a255;
+}
+.memberInfo-wrap>h3{
+	text-align: center;
 }

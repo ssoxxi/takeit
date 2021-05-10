@@ -44,28 +44,24 @@ String categoryName = categoryItemList.get(0).getItemCategoryName();
 </div>
 
 <div class="item_wrap">
-<%
-	for(Item dto : categoryItemList){
-%>
+<c:forEach var="dto" items="${categoryItemList}">
 	<div class="item_list" style="white-space: nowrap;">
 		<div>
-		<a href="/takeit/item/itemController?action=itemDetail&itemNo=<%= dto.getItemNo() %>">
-			<img id="itemListImg" src="/takeit/img/item/<%= dto.getItemImg() %>">
+		<a href="/takeit/item/itemController?action=itemDetail&itemNo=${dto.itemNo}">
+			<img id="itemListImg" src="/takeit/img/item/${dto.itemImg}">
 		</a>
 		</div>
-		<a href="/takeit/item/itemController?action=itemDetail&itemNo=<%= dto.getItemNo() %>">
-		<span id="shop-name">[<%= dto.getShopName() %>]</span><br>
-		<span id="itemLI"><%= dto.getItemName() %></span><br>
+		<a href="/takeit/item/itemController?action=itemDetail&itemNo=%{dto.itemNo}">
+		<span id="shop-name">[${dto.shopName}]</span><br>
+		<span id="itemLI">${dto.itemName}</span><br>
 		</a>
-		<span id="itemFr">신선도 :<%= dto.getFreshPercent() %>%</span><br>
-		<span id="itemPr">&#8361;<fmt:formatNumber value="<%= dto.getItemPrice() %>" pattern="###,###"/></span>
-		<span id="itemDc" style="color: red">(<%= dto.getDiscRate()%>%할인)</span>
-		<span id="itemDiscPrice"><fmt:formatNumber value="<%= (dto.getItemPrice())*(100-(dto.getDiscRate()))/100 %>" pattern="###,###"/>원</span>
+		<span id="itemFr">신선도 :${dto.freshPercent}%</span><br>
+		<span id="itemPr">&#8361;<fmt:formatNumber value="${dto.itemPrice}" pattern="###,###"/></span>
+		<span id="itemDc" style="color: red">(${dto.discRate}%할인)</span>
+		<span id="itemDiscPrice"><fmt:formatNumber value="${dto.itemPrice * (100 - dto.discRate)/100 }" pattern="###,###"/>원</span>
 	</div>
-<%
-	}
-%>
-</div>		
+</c:forEach>
+</div>
 
 <!-- floating Banner -->
 <jsp:include page="/common/floatingBanner.jsp"></jsp:include>

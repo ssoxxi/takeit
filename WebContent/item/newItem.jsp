@@ -31,29 +31,54 @@
 <!-- contents menu -->
 <h1 class="title" style="width:fit-content; margin: 20px auto; font-size: 30px;">신상품</h1>
 <div class="item_wrap">
-<%
-	ArrayList<Item> itemList = (ArrayList<Item>)request.getAttribute("itemList");
-	for(Item dto : itemList){
-%>
-	<div class="item_list" style="white-space: nowrap;" >
+
+<c:forEach var="dto" items="${itemList}" begin="${startRow}" end="${endRow}" >
+	<div class="item_list" style="white-space: nowrap;">
 		<div>
-		<a href="/takeit/item/itemController?action=itemDetail&itemNo=<%= dto.getItemNo() %>">
-			<img id="itemListImg" src="/takeit/img/item/<%= dto.getItemImg() %>">
+		<a href="/takeit/item/itemController?action=itemDetail&itemNo=${dto.itemNo}">
+			<img id="itemListImg" src="/takeit/img/item/${dto.itemImg}">
 		</a>
 		</div>
-		<a href="/takeit/item/itemController?action=itemDetail&itemNo=<%= dto.getItemNo() %>">
-		<span id="shop-name">[<%= dto.getShopName() %>]</span><br>
-		<span id="itemLI"><%= dto.getItemName() %></span><br>
+		<a href="/takeit/item/itemController?action=itemDetail&itemNo=%{dto.itemNo}">
+		<span id="shop-name">[${dto.shopName}]</span><br>
+		<span id="itemLI">${dto.itemName}</span><br>
 		</a>
-		<span id="itemFr">신선도 :<%= dto.getFreshPercent() %>%</span><br>
-		<span id="itemPr">&#8361;<fmt:formatNumber value="<%= dto.getItemPrice() %>" pattern="###,###"/></span>
-		<span id="itemDc" style="color: red">(<%= dto.getDiscRate()%>%할인)</span>
-		<span id="itemDiscPrice"><fmt:formatNumber value="<%= (dto.getItemPrice())*(100-(dto.getDiscRate()))/100 %>" pattern="###,###"/>원</span>
+		<span id="itemFr">신선도 :${dto.freshPercent}%</span><br>
+		<span id="itemPr">&#8361;<fmt:formatNumber value="${dto.itemPrice}" pattern="###,###"/></span>
+		<span id="itemDc" style="color: red">(${dto.discRate}%할인)</span>
+		<span id="itemDiscPrice"><fmt:formatNumber value="${dto.itemPrice * (100 - dto.discRate)/100 }" pattern="###,###"/>원</span>
 	</div>
-<%
-	}
-%>
-</div>		
+</c:forEach>
+</div>
+
+<!-- 페이징 -->
+<div class="view-width">
+	<div id="paging">
+		<c:choose>
+			<c:when test="${whereGroup > 1 }">
+				<span><a href="/takeit/item/itemController?action=itemList&goGroup=1">[처음]</a></span>
+				<span><a href="/takeit/item/itemController?action=itemList&goGroup=${priorGroup}">[이전]</a></span>
+			</c:when>
+			<c:otherwise>
+				<span>[처음]</span>
+				<span>[이전]</span>
+			</c:otherwise>
+		</c:choose>
+		<c:forEach var="i" begin="${startPageNo}" end="${endPageNo}" step="1">
+			<a href="/takeit/item/itemController?action=itemList&go=${i}">${i}</a>
+		</c:forEach>
+		<c:choose>
+			<c:when test="${whereGroup < totalGroup}">
+				<span><a href="/takeit/item/itemController?action=itemList&goGroup=${nextGroup}">[다음]</a></span>
+				<span><a href="/takeit/item/itemController?action=itemList&goGroup=${totalGroup}">[마지막]</a></span>
+			</c:when>
+			<c:otherwise>
+				<span>[다음]</span>
+				<span>[마지막]</span>
+			</c:otherwise>
+		</c:choose>
+	</div>
+</div>
 
 <!-- floating Banner -->
 <jsp:include page="/common/floatingBanner.jsp"></jsp:include>

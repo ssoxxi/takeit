@@ -18,15 +18,12 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-
-
 /** 
  * <pre>
  * 객체 생성없이 사용하기 위한 공통기능 유틸클래스
  * </pre>
  */
 public class Utility {
-
 	/** argument로 전달받은 주소의 위도, 경도를 반환 */
 	public static HashMap<String, String> getLatlng(String address) {
 		String clientId = "5ta9sn0kog";
@@ -61,9 +58,9 @@ public class Utility {
 		}
 		
 		JSONParser parser = new JSONParser();
-		JSONObject jsonObject = null;//네이버로 받아온 JSON데이터를 저장
-		JSONArray jsonArray= null;//addresses 내부의 JSON 배열을 저장
-		JSONObject jsonObject2 = null;//반복문을 통해서 array내부의 데이터를 하나씩 저장
+		JSONObject jsonObject = null;
+		JSONArray jsonArray= null;
+		JSONObject jsonObject2 = null;
 		String x = null;
 		String y = null;
 		try {
@@ -72,10 +69,10 @@ public class Utility {
 			for(Object object: jsonArray) {
 				jsonObject2= (JSONObject)object;
 				if(jsonObject2.get("x")!=null) {
-					x=jsonObject2.get("x").toString();//위도 저장
+					x=jsonObject2.get("x").toString();
 				}
 				if(jsonObject2.get("y")!=null) {
-					y=jsonObject2.get("y").toString();//경도 저장
+					y=jsonObject2.get("y").toString();
 				}
 			}
 			

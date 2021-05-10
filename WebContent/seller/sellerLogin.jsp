@@ -53,14 +53,10 @@ function kakaoLogin() {
 	<!-- 로그인 후 메뉴 -->
 	<jsp:include page="/common/after_login_menu.jsp"></jsp:include>	
 </c:if>
-
-
 <!-- logo.jsp 삽입 -->
 <jsp:include page="/common/logo.jsp"></jsp:include>
-
 <!-- 네비게이션 -->
 <jsp:include page="/common/navigation.jsp"></jsp:include>
-
 <!-- 내용 -->
 <div id="contents_box" align="center">
 <form action="${CONTEXT_PATH}/seller/controller?action=sellerLogin" method="post">
@@ -75,7 +71,13 @@ function kakaoLogin() {
 		<td><input type="text" placeholder="고객님의 아이디를 입력해주세요" id="sellerId" name="sellerId" required="required"/></td>
 	</tr>
 	<tr>
-		<td><input type="password" placeholder="고객님의 비밀번호를 입력해주세요" id="sellerPw" name="sellerPw" required="required"/></td>
+		<td>
+			<input type="password" placeholder="고객님의 비밀번호를 입력해주세요" id="sellerPw" name="sellerPw" required="required"/>
+		</td>
+		<td>
+			<input type="checkbox" id="pwCheckbox" name="pwCheckbox" onclick="pwCheckbox_onclick_seller()"/>
+			<label for="pwCheckbox"></label>
+		</td>
 	</tr>
 	<tr>
 		<td id="find" align="right">

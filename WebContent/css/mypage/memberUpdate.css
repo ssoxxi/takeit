@@ -1,15 +1,12 @@
 @charset "UTF-8";
 
  #myInfo_table table,#myInfo_table th,  #myInfo_table td , #myInfo_table tr{
-	
-		margin: 0 auto;
-		border-collapse: collapse;
-		padding: 5px;
-		width: 1050px;
-		margin-top: 30px;
-		margin-bottom: 20px;
-	
-	
+	margin: 0 auto;
+	border-collapse: collapse;
+	padding: 5px;
+	width: 1050px;
+	margin-top: 30px;
+	margin-bottom: 20px;
 }
 
 
@@ -21,13 +18,10 @@
 	width: 90px;
 }
 
-
 #myInfo_table{
 	width: 490px;
 	margin: 0 auto;
 }
-
-
 
 #mypage_Btn{
 	text-align: center;
@@ -43,6 +37,7 @@
 	background-color: #fff;
 	margin-top: 30px;
 }
+
 #mypage_Btn:hover{
 	background-color: #5a7d59;
 	color: #fff;
@@ -60,17 +55,11 @@
 	cursor: pointer;
 }
 #addressDetail{
-	
 	width:250px;
-	
 }
 #address{
-	
 	width:250px;
-	
 }
-
-
 
 #sellerId {
 	width:250px;
@@ -121,45 +110,6 @@
 	border: 1px solid #7B977A;
 }
 
-/* .removeBtn{
-	text-align: center;
-    display: block;
-    margin: 5px auto 0 auto;
-    width: 290px;
-    height: 45px;
-    line-height: 45px;
-    font-size: 20px;
-    font-weight: 500;
-    color: #35363a;
-    border: solid 1px #8D959C;
-    background-color: #fff;
-    
-}
-.removeBtn:hover{
-	background-color: #5a7d59;
-	color: #fff;
-	font-weight: 600;
-	cursor: pointer;
-} */
-
-
-
-/* .updateBtn{
-	text-align: center;
-    display: block;
-    margin: 5px auto 0 auto;
-    width: 290px;
-    height: 45px;
-    line-height: 45px;
-    font-size: 20px;
-    font-weight: 500;
-    color: #35363a;
-    border: solid 1px #8D959C;
-    background-color: #fff;
-    
-} */
-
-
 .removeBtn{
 	width: 450px;
 	height:40px; 
@@ -172,8 +122,6 @@
 	margin: auto 0 auto 50px;
     
 }
-
-
 
 .updateBtn{
 	width: 450px;
@@ -188,10 +136,40 @@
     
 }
 
+.myPage_menu_aside {
+	width: 200px;
+	height: 600px;
+	float: left;
+	margin-top: 100px;
+}
 
-/* .updateBtn:hover{
-	background-color: #5a7d59;
-	color: #fff;
-	font-weight: 600;
-	cursor: pointer;
-} */
+.myPage_menu_aside ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 200px;
+    background-color: #f1f1f1;
+}
+.myPage_menu_aside li a {
+    display: block;
+    color: #001;
+    padding: 8px 16px;
+    text-decoration: none;
+}
+.myPage_menu_aside h3.active {
+    background-color: #5a7d59;
+    color: white;
+}
+.myPage_menu_aside li a:hover:not(.active) {
+    background-color: #5a7d59;
+    color: white;
+} 
+
+/**사이드바*/
+.side-menu{
+	margin-right: 50px;
+}
+
+#container{
+	display: flex;
+}

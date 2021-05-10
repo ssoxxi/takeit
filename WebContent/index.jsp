@@ -83,7 +83,7 @@ document.querySelector(".btn1").addEventListener('click', function(){
 <ul>
 	<li>
 		<a href="/takeit/item/itemController?action=itemDetail&itemNo=<%= itemList.get(i).getItemNo() %>">
-		<img id="itemImg" src="/takeit/img/item/<%= itemList.get(i).getItemImg() %>">
+		<img id="itemImg" title="<%= itemList.get(i).getItemImg() %>" src="/takeit/img/item/<%= itemList.get(i).getItemImg() %>">
 		</a>
 	</li>
 	<li id="itemTitle">[<%= itemList.get(i).getShopName() %>]<%= itemList.get(i).getItemName() %></li>

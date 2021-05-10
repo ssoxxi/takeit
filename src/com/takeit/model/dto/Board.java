@@ -6,28 +6,40 @@ package com.takeit.model.dto;
 import java.io.Serializable;
 
 /**
- * @author 한소희
+ * 게시글
+ * @author 	한소희
+ * @since	jdk1.8
+ * @version v2.0
  */
 public class Board implements Serializable{
-	private String boardNo;
-	private String boardWriter;
-	private String boardTitle;
-	private String boardContents;
-	private int boardViews;
-	private int boardPicks;
-	private String boardDate;
-	private String boardCategory;
-	private String boardCategoryName;
-	private String boardItem;
-	private String boardItemSeller;
 	
+	/** 게시글 번호, 시스템 자동부여, 필수 */
+	private String boardNo;
+	/** 게시글 작성자, session에 저장된 아이디, 필수 */
+	private String boardWriter;
+	/** 게시글 제목, 사용자 입력, 필수 */
+	private String boardTitle;
+	/** 게시글 내용, 사용자입력, 필수 */
+	private String boardContents;
+	/** 게시글 조회수, 시스템 자동부여, 기본값 0 */
+	private int boardViews;
+	/** 게시글 작성일자, 시스템 자동부여, 기본값  0 */
+	private String boardDate;
+	/** 게시글 카테고리 번호, 사용자입력(카테고리명 선택시 번호로 전달), 필수 */
+	private String boardCategory;
+	/** 게시글 카테고리명, 카테고리 번호에 따라 자동 호출, 필수 */
+	private String boardCategoryName;
+	/** 게시글(상품문의 전용) 상품번호, 상품문의에서만 사용자 입력 */
+	private String boardItem;
+
 	public Board() {}
+	
 	/***
 	 * 공지사항,자주하는 질문 사용자(관리자) 입력데이터
-	 * @param boardWriter
-	 * @param boardTitle
-	 * @param boardContents
-	 * @param boardCategory
+	 * @param boardWriter 	게시글 작성자
+	 * @param boardTitle	게시글 제목
+	 * @param boardContents	게시글 내용
+	 * @param boardCategory	게시글 카테고리
 	 */
 	public Board(String boardWriter, String boardTitle, String boardContents, String boardCategory) {
 		this.boardWriter = boardWriter;
@@ -39,11 +51,11 @@ public class Board implements Serializable{
 	
 	/***
 	 * 상품문의 사용자 입력데이터
-	 * @param boardWriter
-	 * @param boardTitle
-	 * @param boardContents
-	 * @param boardCategory
-	 * @param boardItem
+	 * @param boardWriter	게시글 작성자
+	 * @param boardTitle	게시글 제목
+	 * @param boardContents	게시글 내용
+	 * @param boardCategory	게시글 카테고리
+	 * @param boardItem		게시글 상품번호
 	 */
 	public Board(String boardWriter, String boardTitle, String boardContents, String boardCategory, String boardItem) {
 		this(boardWriter, boardTitle, boardContents, boardCategory);
@@ -57,24 +69,20 @@ public class Board implements Serializable{
 	
 	/***
 	 * 전체입력데이터
-	 * @param boardNo
-	 * @param boardWriter
-	 * @param boardTitle
-	 * @param boardContents
-	 * @param boardViews
-	 * @param boardPicks
-	 * @param boardDate
-	 * @param boardCategory
-	 * @param boardItem
-	 * @param boardItemSeller
+	 * @param boardNo		게시글 번호
+	 * @param boardWriter	게시글 작성자
+	 * @param boardTitle	게시글 제목
+	 * @param boardContents	게시글 내용
+	 * @param boardViews	게시글 조회수
+	 * @param boardDate		게시글 작성일자
+	 * @param boardCategory	게시글 카테고리
+	 * @param boardItem		게시글 상품번호
 	 */
 	public Board(String boardNo, String boardWriter, String boardTitle, String boardContents, int boardViews,
-			int boardPicks, String boardDate, String boardCategory, String boardItem, String boardItemSeller) {
+			String boardDate, String boardCategory, String boardItem) {
 		this(boardWriter, boardTitle, boardContents, boardCategory, boardItem);
 		this.boardViews = boardViews;
-		this.boardPicks = boardPicks;
 		this.boardDate = boardDate;
-		this.boardItemSeller = boardItemSeller;
 	}
 
 	public String getBoardNo() {
@@ -117,14 +125,6 @@ public class Board implements Serializable{
 		this.boardViews = boardViews;
 	}
 
-	public int getBoardPicks() {
-		return boardPicks;
-	}
-
-	public void setBoardPicks(int boardPicks) {
-		this.boardPicks = boardPicks;
-	}
-
 	public String getBoardDate() {
 		return boardDate;
 	}
@@ -149,15 +149,6 @@ public class Board implements Serializable{
 		this.boardItem = boardItem;
 	}
 
-	public String getBoardItemSeller() {
-		return boardItemSeller;
-	}
-
-	public void setBoardItemSeller(String boardItemSeller) {
-		this.boardItemSeller = boardItemSeller;
-	}
-
-	
 	public String getBoardCategoryName() {
 		return boardCategoryName;
 	}
@@ -177,15 +168,11 @@ public class Board implements Serializable{
 		builder.append(", ");
 		builder.append(boardViews);
 		builder.append(", ");
-		builder.append(boardPicks);
-		builder.append(", ");
 		builder.append(boardDate);
 		builder.append(", ");
 		builder.append(boardCategory);
 		builder.append(", ");
 		builder.append(boardItem);
-		builder.append(", ");
-		builder.append(boardItemSeller);
 		return builder.toString();
 	}
 

@@ -3,6 +3,7 @@ package com.takeit.model.dto;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/** 메세지 도메인 클래스 */
 public class MessageEntity {
 	private HashMap<String, ArrayList<String>> messageList = new HashMap<String, ArrayList<String>>();
 	private String url;
@@ -31,11 +32,11 @@ public class MessageEntity {
 		error.add("[잇거래 검색 오류]");
 		error.add("[잇거래 삭제 오류]"); //14
 		
-		error.add("[공지사항/자주하는질문 등록 오류]"); 
-		error.add("[공지사항/자주하는질문 조회 오류]");
-		error.add("[공지사항/자주하는질문 검색 오류]");
-		error.add("[공지사항/자주하는질문 삭제 오류]");		
-		error.add("[공지사항/자주하는질문 변경 오류]"); //19
+		error.add("[게시글 등록 오류]"); 
+		error.add("[게시글 조회 오류]");
+		error.add("[게시글 검색 오류]");
+		error.add("[게시글 삭제 오류]");		
+		error.add("[게시글 변경 오류]"); //19
 		
 		error.add("[장바구니 등록/변경 오류]");
 		error.add("[장바구니 조회 오류]");
@@ -43,7 +44,7 @@ public class MessageEntity {
 		error.add("[장바구니 삭제 오류]"); //23
 		
 		error.add("[상품전체조회 오류]"); 
-		error.add("[후기조회 오류]"); 
+		error.add("[후기전체조회 오류]"); 
 		error.add("[후기정보 변경오류]"); 
 		error.add("[후기 삭제오류]"); 
 		error.add("[상품 조회오류]"); 
@@ -67,7 +68,10 @@ public class MessageEntity {
 
 		error.add("[상점명 중복체크 오류]"); //42
 
-		error.add("[지역시장 중복 등록"); //43
+		error.add("[지역시장 중복 등록]"); //43
+		error.add("[등록상품 변경오류] "); 
+		error.add("[지역시장 삭제 오류]");
+		error.add("[주문 내역 없음]");
 
 		
 		
@@ -103,10 +107,12 @@ public class MessageEntity {
 		success.add("[후기 등록완료]");
 		success.add("[후기 변경완료]");
 		success.add("[상품 등록 성공]");
-	
+		success.add("[후기 삭제 성공]");
+		success.add("[지역상점 삭제 성공]");
 		ArrayList<String> message = new ArrayList<String>();
 		message.add("[이 페이지는 로그인이 필요합니다.]");
 		message.add("[일반회원 전용]");
+		message.add("[관리자 전용]"); //2
 		
 		
 		messageList.put("error", error);

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ include file="/common/taglib_menu.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,18 +25,16 @@
 <!-- 네비게이션 -->
 <jsp:include page="/common/navigation.jsp"></jsp:include>
 <br>
-
+<div id="list-container" class="list-view-width">
+<div id="memberList">
 	<h1 style="width:fit-content; margin: 0 auto;">일반회원 목록</h1>
 	<br>
 	<table id="memberList_table">
 		<tr>
 			<th>아이디</th>
-			<th>비밀번호</th>
 			<th>이름</th>
-			<th>휴대폰</th>
 			<th>이메일</th>
 			<th>가입일자</th>
-			<th>포인트</th>
 			<th>우편번호</th>
 			<th>주소</th>
 			<th>생일</th>
@@ -51,22 +49,13 @@
 				${ dto.getMemberId()}
 			</td>
 			<td>
-				${ dto.getMemberPw()}
-			</td>
-			<td>
 				${ dto.getName()}
-			</td>
-			<td>
-				${ dto.getMobile()}
 			</td>
 			<td>
 				${ dto.getEmail()}
 			</td>
 			<td>
 				${ dto.getEntryDate()}
-			</td>
-			<td>
-				${ dto.getPoint()}
 			</td>
 			<td>
 				${ dto.getPostNo()}
@@ -87,16 +76,12 @@
 				<input type="button" value="탈퇴" id="deleteBtn" onclick="location.href='${CONTEXT_PATH}/member/mypageController?action=AceRemoveMember&memberId=${ dto.getMemberId()}&memberPw=${ dto.getMemberPw()}'">
 			</td>
 		</tr>
-		
 		</c:forEach>
-	
 	</table>
 
-<a href="/takeit/member/myPage.jsp" id="mypage_Btn">마이페이지로 이동</a>
-
-
-
-
+<a href="${CONTEXT_PATH}/member/myPage.jsp" id="mypage_Btn">마이페이지로 이동</a>
+</div>
+</div>
  <!-- footer 구역 -->
 <jsp:include page="/common/footer.jsp"></jsp:include>
 </body>

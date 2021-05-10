@@ -16,16 +16,19 @@ import com.takeit.common.CommonException;
 import com.takeit.model.biz.ItemBiz;
 import com.takeit.model.dto.Item;
 import com.takeit.model.dto.MessageEntity;
+import com.takeit.model.dto.Paging;
 
 
 /**
- * 상품관리를 위한 FrontController servlet
+ * 카테고리에 따른 상품관리를 위한 FrontController servlet
+ * @author 	한소희
+ * @since	jdk1.8
+ * @version v2.0
  */
 @WebServlet("/categoryController")
 public class FrontCategoryServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-	//서버구동시에 해당 어플리케이션당 한개의 한개의 환경설정 
 		public ServletContext application;
 		public String CONTEXT_PATH;
 		
@@ -43,7 +46,10 @@ public class FrontCategoryServlet extends HttpServlet {
 			switch(action) {
 			case "categoryList":
 				categoryList(request,response);
-					break;
+				break;
+			default:
+				response.sendRedirect(CONTEXT_PATH + "/index");
+				break;
 		}
 	}
 	
@@ -66,6 +72,7 @@ public class FrontCategoryServlet extends HttpServlet {
 		
 		ArrayList<Item> categoryItemList = new ArrayList<Item>();
 		ItemBiz ibiz = new ItemBiz();
+		
 		String categoryName = null;
 		try {
 			ibiz.getCategoryItemList(categoryItemList, categoryNo, categoryName);

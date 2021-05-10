@@ -1,15 +1,9 @@
 @charset "UTF-8";
 
-
-img[src$="item/.jpg/"] {
-	width: 30px;
-	height: 30px;
-}
-
-table{
-
-	width: 100%;
-	border:  solid 1px black;
+table, tr, th, td {
+	border: 1px solid grey;
+	border-collapse: collapse;
+	margin-top: 10px;
 }
 
 .itemTable {
@@ -92,8 +86,6 @@ table{
 	font-size: 20px;
 	font-weight: 700;
 }
-#realPrice{
-}
 .btn-area{
 	width: fit-content;
 	float: right;
@@ -101,6 +93,10 @@ table{
 	margin-top: 10px;
 }
 #addCart{
+	display: inline-block;
+	margin-right: 5px;
+}
+#itemAsk{
 	display: inline-block;
 	margin-right: 5px;
 }
@@ -120,4 +116,34 @@ table{
 #noItemList-info{
 	margin-top: 30px;
 	font-size: 20px;
+}
+/**내 등록 상품 수정*/
+#mySell-wrap{
+	width: 1050px;
+	margin: 0 auto;
+}
+#title{
+	font-size: 30px;
+	font-weight: 700;
+	margin-bottom: 10px;
+}
+input, #itemTakeit{
+	line-height: 1.5;
+	width: -webkit-fill-available;
+	style: border: 1px solid #f7f7f6; 
+	font-size: 15px; 
+}
+input[readonly="readonly"]{
+	border: none;
+	background-color: #e5e5e5;
+}
+#itemUpdate-img{
+	width: 220px;
+	height: 290px;
+}
+#itemUpdate-notice{
+	height: 290px;
+}
+#itemTakeit{
+	text-align: center;
 }

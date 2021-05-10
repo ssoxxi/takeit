@@ -58,20 +58,18 @@
 	<tr>
 		<th>글번호</th>
 		<td><%= dto.getBoardNo() %></td>
-		<th>글제목</th>
-			<td><%= dto.getBoardTitle() %> </td>
-		</tr>
-	<tr>
 		<th>조회수</th>
 		<td><%= dto.getBoardViews()%></td>
-		<th>추천수</th>
-		<td><%= dto.getBoardPicks()%> </td>
 	</tr>
 	<tr>
 		<th>작성자</th>
 		<td><%= dto.getBoardWriter() %></td>
 		<th>작성일자</th>
 		<td><%= dto.getBoardDate() %></td>
+	</tr>
+	<tr>
+		<th>글제목</th>
+		<td colspan="3"><%= dto.getBoardTitle() %> </td>
 	</tr>
 	<tr>
 		<th colspan="4">내용</th>

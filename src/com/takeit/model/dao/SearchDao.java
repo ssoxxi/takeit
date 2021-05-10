@@ -13,6 +13,12 @@ import com.takeit.model.dto.Item;
 import com.takeit.model.dto.MessageEntity;
 import com.takeit.model.dto.Search;
 
+/**
+ * 상품검색 dao
+ * @author 	한소희
+ * @since	jdk1.8
+ * @version v2.0
+ */
 public class SearchDao {
 	private static SearchDao instance = new SearchDao();
 	private SearchDao() {}
@@ -23,8 +29,8 @@ public class SearchDao {
 	public void getSearchList(Connection con, ArrayList<Search> searchList, String searchInput) throws CommonException {
 		System.out.println("[debug] 검색 결과 조회 dao 요청");
 		String sql ="SELECT I.ITEM_NO AS ITEM_NO, I.ITEM_NAME AS ITEM_NAME, I.ITEM_PRICE AS ITEM_PRICE, I.ITEM_IMG AS ITEM_IMG, "
-				+ "IC.ITEM_CATEGORY_NAME AS ITEM_CATEGORY_NAME, I.ITEM_CUST_SCORE AS ITEM_CUST_SCORE, "
-				+ "S.NAME AS SELLER_NAME, S.SHOP_NAME AS SHOP_NAME, I.ITEM_TAKEIT AS ITEM_TAKEIT, "
+				+ "IC.ITEM_CATEGORY_NAME AS ITEM_CATEGORY_NAME, "
+				+ "S.NAME AS SELLER_NAME, S.SHOP_NAME AS SHOP_NAME, "
 				+ "I.DISC_RATE AS DISC_RATE "
 				+ "FROM ITEM I FULL OUTER JOIN SELLER S ON(I.SELLER_ID = S.SELLER_ID) "
 				+ "LEFT OUTER JOIN ITEM_CATEGORY IC ON(I.ITEM_CATEGORY_NO = IC.ITEM_CATEGORY_NO) "
@@ -51,12 +57,10 @@ public class SearchDao {
 				dto.setItemNo(rs.getString("item_no"));						//상품번호
 				dto.setItemName(rs.getString("item_name"));					// 상품이름
 				dto.setItemCategoryName(rs.getString("item_category_name"));// 상품 카테고리이름
-				dto.setItemCustScore(rs.getDouble("item_cust_score"));		// 상품 평점
 				dto.setName(rs.getString("seller_name"));					// 판매자 이름
 				dto.setShopName(rs.getString("shop_name"));					// 상점 이름
 				dto.setItemImg(rs.getString("item_img"));					// 상품 이미지
 				dto.setItemPrice(rs.getInt("item_price"));					// 상품 가격	
-				dto.setItemTakeit(rs.getString("item_takeit"));				// 상품 잇거래 여부
 				dto.setDiscRate(rs.getInt("disc_rate"));					// 할인율
 				
 				searchList.add(dto);

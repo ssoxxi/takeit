@@ -26,6 +26,15 @@ var jusoCallBack = function(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,
 </script>
 </head>
 <body>
+<c:if test="${empty dto || empty dto.grade != 'A'}">
+	<jsp:useBean id="message" class="com.takeit.model.dto.MessageEntity" scope="request" />
+	<jsp:setProperty property="type" name="message" value="message"/>
+	<jsp:setProperty property="index" name="message" value="2"/>
+	<jsp:setProperty property="url" name="message" value="${CONTEXT_PATH}/index"/>
+	<jsp:setProperty property="linkTitle" name="message" value="처음으로"/>
+	<jsp:forward page="/message.jsp"/>
+</c:if>
+
 <!-- 상단 메뉴 -->
 <c:if test="${empty memberId and empty sellerId}">
 	<!-- 로그인 전 메뉴 -->
@@ -76,19 +85,19 @@ var jusoCallBack = function(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,
 			<tr>
 				<th>상세주소</th>
 				<td>
-					<input type="text" placeholder="상세주소" id="addressDetail" class="shopLoc-input" name="addressDetail"/>
+					<input type="text" required="required" placeholder="상세주소" id="addressDetail" class="shopLoc-input" name="addressDetail"/>
 				</td>
 			</tr>
 			<tr>
 				<th>상점구역코드</th>
 				<td>
-					<input type="text" placeholder="상점구역코드" id="shopLocCode" class="shopLoc-input" name="shopLocCode"/>
+					<input type="text" required="required" placeholder="상점구역코드" id="shopLocCode" class="shopLoc-input" name="shopLocCode"/>
 				</td>
 			</tr>
 			<tr>
 				<th>상점구역이름</th>
 				<td>
-					<input type="text" placeholder="상점구역이름" id="shopLocName" class="shopLoc-input" name="shopLocName"/>
+					<input type="text" required="required" placeholder="상점구역이름" id="shopLocName" class="shopLoc-input" name="shopLocName"/>
 				</td>
 			</tr>
 		</table>

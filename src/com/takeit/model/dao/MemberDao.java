@@ -14,9 +14,10 @@ import com.takeit.model.dto.MessageEntity;
 import com.takeit.util.Utility;
 
 /**
- * 일반회원 : DB접근
- * @author 임우진
- * 
+ * 일반 회원관리 컨트롤러
+ * @author  임우진
+ * @since   jdk1.8
+ * @version v2.0
  */
 public class MemberDao {
 
@@ -246,5 +247,45 @@ public class MemberDao {
 		}
 		return true;
 	}
-	
+
+	public void kakaoLogin(Connection con, Member member) throws CommonException {
+		String sql = "select * from member where member_Id = ?";
+
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		
+		try {
+			stmt = con.prepareStatement(sql);
+			
+			stmt.setString(1, member.getMemberId());
+			
+			rs = stmt.executeQuery();
+
+			if(rs.next()) {
+				member.setMemberId(rs.getString("member_Id"));
+				member.setMemberPw(rs.getString("member_Pw"));
+				member.setName(rs.getString("name"));
+				member.setMobile(rs.getString("mobile"));
+				member.setEmail(rs.getString("email"));
+				member.setEntryDate(rs.getString("entry_date"));
+				member.setPostNo(rs.getString("postno"));
+				member.setAddress(rs.getString("address"));
+				member.setAddressDetail(rs.getString("address_detail"));
+				member.setGrade(rs.getString("grade"));
+				member.setPoint(rs.getInt("point"));
+				member.setBirth(rs.getString("birth"));
+				member.setMemberLocNo(rs.getString("member_loc_no"));
+				member.setShopLocCode(rs.getString("shop_loc_code"));
+			}
+		} catch (SQLException e) {		
+			e.printStackTrace();
+			MessageEntity message = new MessageEntity("error",34);
+			message.setUrl("/takeit/member/memberLogin.jsp");
+			message.setLinkTitle("뒤로가기");
+			throw new CommonException(message);
+		}finally {
+			JdbcTemplate.close(rs);
+			JdbcTemplate.close(stmt);
+		}
+	}
 }

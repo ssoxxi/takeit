@@ -1,5 +1,11 @@
 @charset "UTF-8";
 
+/* 유효성검사 결과 */
+.orderResult{
+	font-size:12px;
+	color:#666666;
+	font-style: normal;
+}
 /**사이드바*/
 .side-menu{
 	margin-right: 50px;
@@ -11,8 +17,9 @@
 	margin: 0 auto;
 	font-size: 30px;
 }
-order-info>span{
-	font-size: 14px;
+.order-info>span{
+	font-size: 17px;
+	line-height: 1.4;
 }
 /**주문버튼*/
 .cancle-btn{
@@ -43,12 +50,11 @@ order-info>span{
 .order-detail{
 	display: inline-block;
 	margin-top: 20px;
-	width: 300px;
+	width: 400px;
 }
 .order-detail>span{
 	font-size: 20px;
 	line-height: 1.7;
-
 }
 /**주문내역 버튼영역*/
 .order-detail-btn{
@@ -109,4 +115,27 @@ order-info>span{
 }
 #order-totPrice{
 	font-size: 30px;
+}
+/**판매자 판매내역*/
+#sellerOrder-wrap{
+	width: 1050px;
+	display: flex;
+	margin: 0 auto;
+}
+.orderList-wrap{
+	margin-top: 30px;
+}
+/**no order list*/
+#noOrderList-wrap{
+	width: fit-content;
+	margin: 20px auto;
+}
+#noOrderList-title>h3{
+	font-size: 40px;
+	font-weight: 700;
+	text-align: center;
+}
+#noOrderList-info{
+	margin-top: 30px;
+	font-size: 20px;
 }

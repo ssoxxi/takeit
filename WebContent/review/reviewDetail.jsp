@@ -3,6 +3,8 @@
 <%@ include file="/common/taglib_menu.jsp"%>
 <%@ page import="java.util.ArrayList"%>
 <%@page import="com.takeit.model.dto.Review"%>
+<%@page import="com.takeit.model.dto.Item"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -76,9 +78,13 @@
 		<div class="btn-area" align='center'>
 			<input type="button" class="link" style="display: inline-block;"
 				value="목록" onclick="location.href='/takeit/item/reviewController?action=reviewList'"/> 
-			<input type="button" class="link"
-				style="display: inline-block;" value="상품보러가기" onclick="location.href='/takeit/index'"/>
-		</div>
+		   <form action="/takeit/item/itemController?action=itemDetail&itemNo=${review.itemNo}" method="post"  style="display: inline-block;">
+	         <input type="submit" class="link" value="상품보러가기"/>
+			</form>
+	   </div>
+		
+				
+
 	</div>
 </div>
 <!-- floating Banner -->

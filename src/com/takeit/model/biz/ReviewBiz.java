@@ -113,7 +113,7 @@ public class ReviewBiz {
 
 	/**후기상세조회*/
 	public void searchReview(Review dto,String reviewNo) throws CommonException {
-		//ReviewDao dao = ReviewDao.getInstance();
+
 		Connection conn = JdbcTemplate.getConnection();
 		System.out.println("dto = "+ reviewNo);
 		try {

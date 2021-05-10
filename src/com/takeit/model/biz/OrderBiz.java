@@ -16,13 +16,13 @@ import com.takeit.model.dto.Takeit;
 /**
  * 주문 업무처리 위한 OrderBiz 클래스
  * @author 김태경
+ * @since jdk1.8
+ * @version v2.0 2021/05/10
  */
 public class OrderBiz {
-
 	/**
 	 * 주문 등록
-	 * @param order 주문 객체
-	 * @throws CommonException 
+	 * @param orderList 주문목록
 	 */
 	public void addOrder(ArrayList<Order> orderList) throws CommonException {
 		OrderDao dao = OrderDao.getInstance();
@@ -45,6 +45,7 @@ public class OrderBiz {
 					takeitDao.selectLoc(conn, order.getMemberId(), takeit);
 					takeitDao.selectTakeitNo(conn, takeit);
 					takeitDao.insertTakeitDetail(conn, takeit, order);
+					takeitDao.updateTakeitCurrPrice(conn, takeit, order);
 				}
 				for (OrderDetail orderDetail : order.getOrderDetails()) {
 					CartDao.getInstance().removeCart(conn, order.getMemberId(), orderDetail.getItemNo());
@@ -151,8 +152,6 @@ public class OrderBiz {
 			JdbcTemplate.close(conn);
 		}
 	}
-  
-
 
 	/** 주문 정보 조회 */
 	public void getOrderItem(Order order) throws CommonException {

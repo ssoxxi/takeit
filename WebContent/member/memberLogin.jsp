@@ -12,30 +12,55 @@
 <script type="text/javascript" src="${CONTEXT_PATH}/js/member/login.js"></script>
 <!-- 카카오 스크립트 -->
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
-<!-- 카카오 로그인 -->
 <script>
-Kakao.init('4a836a6d7613b825e60dc25d5b9d8a82'); //발급받은 키 중 javascript키를 사용해준다.
+Kakao.init('ef7d648c9d8cef88d6c092d4942eee41'); //발급받은 키 중 javascript키를 사용해준다.
 console.log(Kakao.isInitialized()); // sdk초기화여부판단
+//<!-- 카카오 로그인 -->
+var kakaoId = "";
 function kakaoLogin() {
-    Kakao.Auth.login({
-      scope: 'account_email',
-      success: function (response) {
-        Kakao.API.request({
-          url: '/v2/user/me',
-          success: function (response) {
-        	  const kakao_account = response.kakao_account;
-        	  //$("#id").text(response.id);
-        	  //("#email").text(response.kakao_account.email);
-        	  console.log(response)
-        	  
-          },
-          fail: function (error) {
-            console.log(error)
+	
+	console.log(Kakao.Auth.getAccessToken());
+	console.log("login req");
+	Kakao.Auth.loginForm({
+		scope: 'account_email',
+		success: function (response) {
+		console.log("login succ");
+		Kakao.API.request({
+			url: '/v2/user/me',
+			success: function (response) {
+			kakaoId =""+ response.id;
+			console.log(kakaoId);
+			const kakao_account = response.kakao_account;
+			$.ajax({	
+				url:"/takeit/member/controller?action=memberIdChk",
+				type:"post",
+				data:{
+					"memberId" : ""+kakaoId
+				},	
+				success:function(data){
+					console.log(kakaoId);
+					if(data == "1"){
+						alert("회원가입이 필요합니다!!!");
+						$("#kakaoEmail").val(kakao_account.email);
+						$("#kakaoIdInput").val(""+kakaoId);
+						$("#kakaoInputForm").submit();
+        					
+       				} else {					
+						$("#kakaoId").val(response.id);
+						$("#kakaoLoginForm").submit();
+					}
+       			}
+       		});
+		},
+		fail: function (error) {
+			console.log(error)
+            console.log("요청실패");
           },
         })
       },
       fail: function (error) {
         console.log(error)
+        console.log("로그인실패");
       },
     })
   }
@@ -53,14 +78,10 @@ function kakaoLogin() {
 	<!-- 로그인 후 메뉴 -->
 	<jsp:include page="/common/after_login_menu.jsp"></jsp:include>	
 </c:if>
-
-
 <!-- logo.jsp 삽입 -->
 <jsp:include page="/common/logo.jsp"></jsp:include>
-
 <!-- 네비게이션 -->
 <jsp:include page="/common/navigation.jsp"></jsp:include>
-
 <!-- 내용 -->
 <div id="contents_box" align="center">
 <table>
@@ -77,7 +98,13 @@ function kakaoLogin() {
 		<td><input type="text" placeholder="고객님의 아이디를 입력해주세요" id="memberId" name="memberId" required="required"/></td>
 	</tr>
 	<tr>
-		<td><input type="password" placeholder="고객님의 비밀번호를 입력해주세요" id="memberPw" name="memberPw" required="required"/></td>
+		<td>
+			<input type="password" placeholder="고객님의 비밀번호를 입력해주세요" id="memberPw" name="memberPw" required="required"/>
+		</td>
+		<td>
+			<input type="checkbox" id="pwCheckbox" name="pwCheckbox" onclick="pwCheckbox_onclick()"/>
+			<label for="pwCheckbox"></label>
+		</td>
 	</tr>
 	<tr>
 		<td id="find" align="right">
@@ -100,11 +127,17 @@ function kakaoLogin() {
 		<!-- <td><input type="button" value="카카오 로그인" id="kakaoLogin" onclick="kakaoLogin();"/></td> -->
 	</tr>
 </table>
-<!-- <div>
-	회원번호 : <span id ="id"></span><br>
-	이메일 : <span id="email"></span><br>
-</div> -->
 </form>
+
+<form id="kakaoLoginForm" action="/takeit/member/controller?action=kakaoLogin" method="post">
+	<input id="kakaoId" type="hidden" name="kakaoId" value="">
+</form>
+
+<form id="kakaoInputForm" action="/takeit/member/controller?action=kakaoMemberInputForm" method="post">
+	<input id="kakaoIdInput" type="hidden" name="kakaoIdInput" value="">
+	<input id="kakaoEmail" type="hidden" name="kakaoEmail" value="">
+</form>
+
 </div>
 <!-- scroll function -->
 <jsp:include page="/common/back_to_top.jsp"></jsp:include>

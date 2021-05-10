@@ -4,7 +4,6 @@ table, tr, th , td{
 		border: solid 1px #8D959C;
 }
 
-
 .notice-table, .notice-tr
 .notice-tr>th, .notice-tr>td{
 		margin: 0 auto;
@@ -29,4 +28,41 @@ table, tr, th , td{
 #boardLink:hover{
 	color: #5a7d59;
 	font-weight: 700;
+}
+/**board input*/
+#boardWriter{
+	border: none;
+}
+.boardInput{
+	width: -webkit-fill-available;
+	line-height: 1.5;
+	font-size: 18px;
+}
+#boardInput{
+	width: -webkit-fill-available;
+	height: 500px;
+	resize: none;
+	font-size: 18px;
+}
+/**board search*/
+#boardSearch-area{
+	width: fit-content;
+	margin: 0 auto;
+	text-align: center;
+}
+.searchInput{
+	line-height: 20px;
+	font-size: 16px;
+}
+#searchInput-btn{
+	border: solid 1px #5a7d59;
+	color: #fff;
+	background-color: #5a7d59;
+	text-decoration: none;
+	padding: 3px 10px 3px 10px;
+	border-radius: 30px;
+}
+#searchInput-btn:hover{
+	font-weight: 600;
+	cursor: pointer;
 }

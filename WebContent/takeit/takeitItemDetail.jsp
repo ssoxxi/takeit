@@ -85,18 +85,30 @@ $(document).ready(function (){
 	$("#addCart-area").hide();
 	
 	$("#addCart").on("click",function(){
+		var isDto = ${dto == null} ;
+		var isSellerId = ${sellerId != null} ;
+		
+		if(isDto){
+			location.href='/takeit/cartController?action=addCart';
+			return;
+		}
+		if(isSellerId){
+			alert('판매자는 구매할 수 없습니다');
+			return;
+		}
 		$("#addCart-area").slideToggle(300);
 	});
 });
 
 </script>
 </head>
+<body>
 <!-- 상단 메뉴 -->
-<c:if test="${empty memberId }">
+<c:if test="${empty memberId and empty sellerId}">
 	<!-- 로그인 전 메뉴 -->
 	<jsp:include page="/common/before_login_menu.jsp"></jsp:include>
 </c:if>
-<c:if test="${not empty memberId }">
+<c:if test="${not empty memberId or not empty sellerId}">
 	<!-- 로그인 후 메뉴 -->
 	<jsp:include page="/common/after_login_menu.jsp"></jsp:include>	
 </c:if>
@@ -112,12 +124,18 @@ $(document).ready(function (){
 			<img id="takeit-detailImg" style="width:330px; height: 400px; " src="/takeit/img/item/${takeitItem.itemImg}">
 		</div>
 		<div class="desc takeit_detail_wrap">
+		
+		
+		
 			<fmt:formatNumber var="itemPrice" value="${takeitItem.itemPrice}" type="number"/>
 			<fmt:formatNumber var="discPrice" value="${takeitItem.itemPrice * (100-takeitItem.discRate) / 100}" type="number"/>
 			<fmt:parseNumber  var="intPrice" value="${(takeitItem.itemPrice * (100-takeitItem.discRate) / 100)/1000}" integerOnly="true"/>
 			<fmt:formatNumber var="takeitItemPrice" value="${intPrice*1000}" type="number"/>
 			<fmt:formatNumber var="itemDiscRate" value="${takeitItem.discRate / 100}" type="percent"/>
 			<fmt:formatNumber var="takeitDisc" value="${(takeitItem.itemPrice * (100-takeitItem.discRate) / 100) - intPrice*1000 }" type="number"/>
+			
+			
+			
 			<ul class="takeit_info">
 				<h2>${takeitItem.itemName} (<span id="takeitFresh" data-takeitexpdate="${takeitItem.freshPercent}"></span>)</h2>
 				<li style="list-style: none">
@@ -135,24 +153,46 @@ $(document).ready(function (){
 				<span class="it_info"><b>고객평점</b>&emsp;${takeitItem.itemCustScore}</span><br>
 				<span class="it_info"><b>유통기한</b>&emsp;<span id="takeitExpDate" data-takeitexpdate="${takeitItem.expirationDate}"></span> 이내</span><br>
 				<span class="it_info"><b>등록일자</b>&emsp;${(takeitItem.itemInputDate).substring(0,10)}</span><br>
-				<span class="it_info"><b>구역번호</b>&emsp;<span style="font-weight: 600;">${takeitItem.shopLocCode}-${takeitItem.memberLocNo }</span></span><br>
+				
 				<fmt:formatNumber var="takeitRate" type="percent" value="${takeitItem.takeitCurrPrice/takeitItem.takeitPrice}" />
 				<fmt:formatNumber var="takeitCurrPrice" type="number" value="${takeitItem.takeitCurrPrice}" />
 				<fmt:formatNumber var="takeitPrice" type="number" value="${takeitItem.takeitPrice}" />
-				<span class="it_info"><b>목표금액 달성률</b>&emsp; <span style="color: red; font-weight: 600;">${takeitRate}</span> (${takeitCurrPrice}원 / ${takeitPrice}원)</span><br>
+				<c:choose>
+					<c:when test="${not empty memberId and not empty dto and dto.shopLocCode == takeitItem.shopLocCode}">
+						<span class="it_info"><b>구역번호</b>&emsp;<span style="font-weight: 600;">${takeitItem.shopLocCode}-${dto.memberLocNo} (${takeitItem.shopLocName})</span></span><br>
+						<span class="it_info"><b>목표금액 달성률</b>&emsp; <span style="color: red; font-weight: 600;">${takeitRate}</span> (${takeitCurrPrice}원 / ${takeitPrice}원)</span><br>
+					</c:when>
+					<c:when test="${not empty sellerId and not empty dto}">
+						<span class="it_info"><b>구역번호</b>&emsp;<span style="font-weight: 600;">${takeitItem.shopLocCode} (${takeitItem.shopLocName})</span></span><br>
+						<span class="it_info"><b>목표금액 달성률</b>&emsp; <span style="color: black; font-weight: 600;">판매자는 구매 불가능</span></span><br>
+					</c:when>
+					<c:when test="${not empty dto}">
+						<span class="it_info"><b>구역번호</b>&emsp;<span style="font-weight: 600;">${takeitItem.shopLocCode} (${takeitItem.shopLocName})</span></span><br>
+						<span class="it_info"><b>목표금액 달성률</b>&emsp; <span style="color: black; font-weight: 600;">내 지역이 아닙니다</span></span><br>
+					</c:when>
+					<c:otherwise>
+						<span class="it_info"><b>구역번호</b>&emsp;<span style="font-weight: 600;">${takeitItem.shopLocCode} (${takeitItem.shopLocName})</span></span><br>
+						<span class="it_info"><b>목표금액 달성률</b>&emsp; <span style="color: black; font-weight: 600;">로그인이 필요합니다</span></span><br>
+					</c:otherwise>
+				</c:choose>
+				
 			</ul>
 		</div>
 	</div>
 	<div class="btn-area">
 	<input type="button" class="link" id="addCart"  style="display: inline-block;" value="장바구니"/>
-	<form action="#" method="post" style="display: inline-block;">
-	<input type="button" class="link" style="display: inline-block;" value="구매"/>
+	<form action="${CONTEXT_PATH}/order/orderController?action=orderForm"  method="post" style="display: inline-block;" id="buyItemForm">
+		<input type="hidden" value="${takeitItem.itemNo}" name="itemNo"> 
+		<input type="hidden" value="1" name="itemQty"> 
+		<input type="hidden" value="${intPrice*1000}" name="itemPrice" > 
+		<input type="hidden" value="${intPrice*1000}" name="totalPrice" > 
+		<input type="hidden" value="${intPrice*1000}" name="cartTotalPrice" > 
+		<input type="button" class="link" style="display: inline-block;" value="구매" onclick="if(${dto == null }){$('#buyItemForm').submit();return;};if(${sellerId != null}){alert('판매자는 구매할 수 없습니다'); return;} ;if('${takeitItem.shopLocCode}' != '${dto.shopLocCode}'){ alert('내 구역 상품만 구매할 수 있습니다');return;} $('#buyItemForm').submit(); "/>
 	</form>
 	</div>
 	<!-- 장바구니 등록 -->
 	<div id="addCart-area">
 	<form action="/takeit/cartController?action=addCart&itemNo=${takeitItem.itemNo }" method="post">
-	<!-- <form action="/takeit/cartController?action=addCart" method="post"> -->
 	<br><hr>
 		<div id="addCart-info">
 			<div id="cart-info">
@@ -161,21 +201,17 @@ $(document).ready(function (){
 				<b>판매자</b>&emsp;
 				<span id="addcart-itemSeller">${takeitItem.sellerName }</span><br>
 				<b>배송비</b>&emsp;
-				<span id="addcart-shippingFee">3500원</span><br>
+				<span id="addcart-shippingFee">무료(잇거래)</span><br>
 				<b>수량</b>&emsp;&emsp;
 				<select id="addcart-itemQty" name="cart-itemQty">
-				<%
-					for(int i=1; i<10; i++){
-				%>
-					<option value="<%= i %>"><%= i %></option>
-				<%
-					}
-				%>
+				<c:forEach var="i" begin="1" end="9">
+					<option>${i}</option>
+				</c:forEach>
 				</select>
 			</div>
 		</div>
 		<div id="addCart-btn-area">
-			<input type="submit" class="link" value="장바구니 추가"/>
+			<input type="submit" class="link" value="장바구니 추가" onclick="if(${dto == null}){return true;};if('${takeitItem.shopLocCode}' != '${dto.shopLocCode}'){alert('내 구역 상품만 구매할 수 있습니다'); return false}; return true; "/>
 		</div>
 	</form>
 	</div>

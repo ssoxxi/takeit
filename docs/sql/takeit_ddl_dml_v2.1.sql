@@ -318,22 +318,34 @@ insert into shop_category values('5','쌀');
 --SELECT * FROM SHOP_CATEGORY;
 
 --회원구역
-insert into MEMBER_LOC values('29','AA','인천시 부평구');
-insert into MEMBER_LOC values('30','BB','서울시 관악구');
+--insert into MEMBER_LOC values('29','AA','인천시 부평구');
+--insert into MEMBER_LOC values('30','BB','서울시 동대문구');
 --SELECT * FROM MEMBER_LOC;
+BEGIN
+FOR i IN 0..99 LOOP 
+INSERT INTO MEMBER_LOC VALUES (i, 'AA' , 'AA-'||i);
+END LOOP;
+END;
+--
+BEGIN
+FOR i IN 0..99 LOOP 
+INSERT INTO MEMBER_LOC VALUES (i, 'BB' , 'BB-'||i);
+END LOOP;
+END;
+
 
 --일반회원
 INSERT INTO MEMBER VALUES('user01', 'password01', '홍길동', '010-1111-1111', 'user01@takeit.com', '2021-04-30', 12345, '인천시 부평구', '승리호아파트 309동 502호', 'G', 1000, '1987-05-05', '29', 'AA'); 
-INSERT INTO MEMBER VALUES('user02', 'password02', '김유신', '010-2222-2222', 'user02@takeit.com', '2020-05-13', 56789, '인천시 부평구', '해바라기아파트 1209동 706호', 'G', 89000, '1997-07-06', '29', 'AA'); 
+INSERT INTO MEMBER VALUES('user02', 'password02', '김유신', '010-2222-2222', 'user02@takeit.com', '2020-05-13', 56789, '서울시 동대문구', '해바라기아파트 1209동 706호', 'G', 89000, '1997-07-06', '30', 'BB'); 
 INSERT INTO MEMBER VALUES('user03', 'password03', '강감찬', '010-3333-3333', 'user03@takeit.com', '2021-02-27', 98765, '서울시 부평구', '안경잡이아파트 110동 208호', 'G', 5000, '1987-05-05', '29', 'AA'); 
 INSERT INTO MEMBER VALUES('admin', 'adminpass99', '관리자', '010-9999-9999', 'admin@takeit.com', '2014-02-27', 45678, '서울시 관악구', '아자아자아파트 807동 1302호', 'A', 0, '1995-12-05', '30', 'BB'); 
 --SELECT * FROM GENERAL_MEMBER;
 
 --판매자회원
 INSERT INTO SELLER VALUES('seller01', 'password01', '심선경', '010-1234-1111', 'seller01@takeit.com', '2021-02-27', 98765, '인천시 부평구', '부평시장', 'S', '456-78-90123', '010-1111-1234', '선경이네 야채가게', 9.8, NULL, NULL, '1', 'AA'); 
-INSERT INTO SELLER VALUES('seller02', 'password02', '김태경', '010-1234-2222', 'seller02@takeit.com', '2021-04-30', 12345, '인천시 부평구', '부평시장', 'S','123-45-67890', '010-2222-1234', '태경이네 과일가게', 9.3, NULL, NULL, '2', 'AA'); 
+INSERT INTO SELLER VALUES('seller02', 'password02', '김태경', '010-1234-2222', 'seller02@takeit.com', '2021-04-30', 12345, '서울시 동대문구', '동대문시장', 'S','123-45-67890', '010-2222-1234', '태경이네 과일가게', 9.3, NULL, NULL, '2', 'BB'); 
 INSERT INTO SELLER VALUES('seller03', 'password03', '임우진', '010-1234-3333', 'seller03@takeit.com', '2019-06-30', 95123, '서울시 동대문구', '동대문시장', 'S','748-59-61230', '010-3333-1234', '우진이네 정육점', 9.3, NULL, NULL, '3', 'BB'); 
-INSERT INTO SELLER VALUES('seller04', 'password04', '한소희', '010-1234-4444', 'seller04@takeit.com', '2020-12-13', 56789, '인천시 남동구', '남동시장', 'S', '968-57-41302', '010-4444-1234', '소희네 반차가게', 9.5, NULL, NULL, '4', 'AA'); 
+INSERT INTO SELLER VALUES('seller04', 'password04', '한소희', '010-1234-4444', 'seller04@takeit.com', '2020-12-13', 56789, '인천시 남동구', '남동시장', 'S', '968-57-41302', '010-4444-1234', '소희네 반찬가게', 9.5, NULL, NULL, '4', 'AA'); 
 INSERT INTO SELLER VALUES('seller05', 'password05', '김효원', '010-1234-5555', 'seller05@takeit.com', '2020-05-13', 56789, '인천시 부평구', '부평시장', 'S', '987-65-43210', '010-5555-1234', '효원이네 쌀가게', 9.7, NULL, NULL, '5', 'AA'); 
 
 --SELECT * FROM SELLER_MEMBER;
@@ -379,17 +391,19 @@ INSERT INTO SHIPPING VALUES('DONE','배달완료');
 --주문 초기화데이터--
 INSERT INTO ORDERS VALUES ('F210305000001', '방문수령', '홍길동', null, null, '010-1111-1111', null, 7440, 'F', 'F', null, 'user01');
 INSERT INTO ORDERS VALUES ('T210501000004', '배송', '늦가을', '57689', '인천시 부평구', '010-1234-4444', '경비실에 맡겨주세요', 4000, 'F', 'F', 'O-GET', 'user01');
-INSERT INTO ORDERS VALUES ('T210501000001', '배송', '한겨울', '12345', '인천시 부평구', '010-1515-1515', '문 앞', 32000, 'F', 'F', 'O-GET', 'user02');
-INSERT INTO ORDERS VALUES ('T210501000002', '배송', '초가을', '13451', '인천시 부평구', '010-1234-2222', '제일 신선한 것으로 챙겨주세요', 10000, 'F', 'F', 'O-GET', 'user02');
 INSERT INTO ORDERS VALUES ('T210501000003', '배송', '늦여름', '12365', '인천시 부평구', '010-1234-3333', '문 앞에 두고 가세요', 8000, 'F', 'F', 'O-GET', 'user03');
 INSERT INTO ORDERS VALUES ('T210501000005', '배송', '초여름', '14151', '인천시 부평구', '010-1234-5555', '오후 4시에 챙겨갈게요', 6000, 'F', 'F', 'O-GET', 'user03');
 
+INSERT INTO ORDERS VALUES ('T210501000001', '배송', '한겨울', '12345', '서울시 동대문구', '010-1515-1515', '문 앞', 32000, 'F', 'F', 'O-GET', 'user02');
+INSERT INTO ORDERS VALUES ('T210501000002', '배송', '초가을', '13451', '서울시 동대문구', '010-1234-2222', '제일 신선한 것으로 챙겨주세요', 10000, 'F', 'F', 'O-GET', 'user02');
+
 --주문상세 초기화데이터--
 INSERT INTO ORDER_DETAIL VALUES('SD000001', 'F210305000001', 2, 3720);
+
 INSERT INTO ORDER_DETAIL VALUES('FR000002', 'T210501000001', 1, 3000);
-INSERT INTO ORDER_DETAIL VALUES('BF000008', 'T210501000001', 1, 29000);
-INSERT INTO ORDER_DETAIL VALUES('SD000001', 'T210501000002', 2, 3000);
-INSERT INTO ORDER_DETAIL VALUES('RC000010', 'T210501000002', 1, 4000);
+INSERT INTO ORDER_DETAIL VALUES('BF000003', 'T210501000001', 1, 29000);
+INSERT INTO ORDER_DETAIL VALUES('FR000007', 'T210501000002', 2, 4000);
+INSERT INTO ORDER_DETAIL VALUES('BF000008', 'T210501000002', 1, 30000);
 
 INSERT INTO ORDER_DETAIL VALUES('VG000004', 'T210501000003', 1, 5000);
 INSERT INTO ORDER_DETAIL VALUES('SD000006', 'T210501000003', 1, 3000);
@@ -398,11 +412,24 @@ INSERT INTO ORDER_DETAIL VALUES('RC000005', 'T210501000005', 1, 6000);
 
 --------------------------------------------------------------------------------
 --잇거래 초기화데이터--
-INSERT INTO TAKEIT VALUES('TAKE210501000001', 1000000, 50000, '2021/05/01 18:45:10', 0.0, 'T', '29', 'AA');
+--INSERT INTO TAKEIT VALUES('TAKE210501000001', 1000000, 50000, '2021/05/01 18:45:10', 0.0, 'T', '29', 'AA');
+--INSERT INTO TAKEIT VALUES('TAKE210506000001', 1000000, 50000, '2021/05/06 00:45:10', 0.0, 'T', '30', 'BB');
+BEGIN
+FOR i IN 0..99 LOOP 
+INSERT INTO TAKEIT VALUES ('TAKE' || '210501' || LPAD(TAKEIT_SEQ.NEXTVAL, 6, '0'), 1000000 ,0 ,'2021/05/01 18:45:10', 0.0, 'T', i,'AA');
+END LOOP;
+END;
+
+BEGIN
+FOR i IN 0..99 LOOP 
+INSERT INTO TAKEIT VALUES ('TAKE' || '210506' || LPAD(TAKEIT_SEQ.NEXTVAL, 6, '0'), 1000000 ,0 ,'2021/05/06 00:45:10', 0.0, 'T', i,'BB');
+END LOOP;
+END;
 
 --잇거래상세 초기화데이터
-INSERT INTO TAKEIT_DETAIL VALUES('TAKE210501000001', 'T210501000001');
-INSERT INTO TAKEIT_DETAIL VALUES('TAKE210501000001', 'T210501000002');
+INSERT INTO TAKEIT_DETAIL VALUES('TAKE210506000101', 'T210501000001');
+INSERT INTO TAKEIT_DETAIL VALUES('TAKE210506000101', 'T210501000002');
+
 INSERT INTO TAKEIT_DETAIL VALUES('TAKE210501000001', 'T210501000003');
 INSERT INTO TAKEIT_DETAIL VALUES('TAKE210501000001', 'T210501000004');
 INSERT INTO TAKEIT_DETAIL VALUES('TAKE210501000001', 'T210501000005');

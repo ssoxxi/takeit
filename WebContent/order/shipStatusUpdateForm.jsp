@@ -30,6 +30,15 @@ function updateStatus() {
 </script>
 </head>
 <body>
+<c:if test="${empty dto}">
+	<jsp:useBean id="message" class="com.takeit.model.dto.MessageEntity" scope="request" />
+	<jsp:setProperty property="type" name="message" value="message"/>
+	<jsp:setProperty property="index" name="message" value="0"/>
+	<jsp:setProperty property="url" name="message" value="${CONTEXT_PATH}/index"/>
+	<jsp:setProperty property="linkTitle" name="message" value="처음으로"/>
+	<jsp:forward page="/message.jsp"/>
+</c:if>
+
 <h2 align="center">배송상태 변경</h2>
 <form action="${CONTEXT_PATH}/order/orderController?action=updateShipStatus" method="post">
 <div align="center" style="width:fit-content;margin: 0 auto;margin-top:50px;">

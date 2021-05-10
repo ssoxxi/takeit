@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <title>findMessage</title>
 <link type="text/css" rel="stylesheet" href="/takeit/css/link.css">
+<link type="text/css" rel="stylesheet" href="/takeit/css/member/find.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 </head>
 
@@ -32,21 +33,26 @@
 
 
 <!-- contents -->
-<div id="contents">
-<h3 align="center">응답 메세지</h3><br>	
-<table id="table_logds" border="1px" align="center" cellspacing = 5>
-	<tr>
-		<td>고객님의 정보와 일치하는 아이디 목록입니다.</td>
-	</tr>
-	<tr>
-		<td>아이디 : ${idInfo}</td>
-	</tr>		
-	<tr>
-		<td>가입일 : ${entryDate}</td>
-	</tr>	
-</table>
+<div class="view-width">
+	<div id="title">
+		<h3>응답 메세지</h3>
+	</div>
+	<div id="find-table">	
+	<table id="table_logds" class="find-table">
+		<tr class="find-table">
+			<td colspan="2" class="find-table">고객님의 정보와 일치하는 아이디 목록입니다.</td>
+		</tr>
+		<tr class="find-table">
+			<th class="find-table">아이디</th>
+			<td class="find-table">${idInfo}</td>
+		</tr>		
+		<tr class="find-table">
+			<th class="find-table">가입일</th>
+			<td class="find-table">${entryDate}</td>
+		</tr>	
+	</table>
+	</div>
 </div>
-<hr/>
 <!-- scroll function -->
 <jsp:include page="/common/back_to_top.jsp"></jsp:include>
 <!-- footer 구역 -->

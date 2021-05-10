@@ -1,18 +1,19 @@
+/**
+ * 회원가입 : 일반, 판매자
+ * @author 임우진
+ * 
+ */
 @charset "UTF-8";
 
+/* 내용 div */ 
 #contents_box {	
 	margin: auto;
 }
-#contents_box > table {		
-	/* font-size: 9px; */
-}
-#contents_box > p {	
-	/* font-size: 9px; */
-}
+/* * 표시 텍스트 */
 .star {
 	color: #FF0000;
 }
-/* 일반회원가입 폼 */
+/* 일반회원가입 폼 : 사용안함*/
 #nomal_inputForm{
 	width: 315px;
 	height: 60px; 
@@ -24,7 +25,7 @@
 	border: 1px solid #7B977A;
 	cursor: pointer;
 }
-/* 일반회원 데이터 시작*/
+/* 일반 아이디 */
 #memberId{
 	width:250px;
 	height:35px; 
@@ -32,6 +33,7 @@
 	font-size: 9px;
 	border: 1px solid #7B977A;
 }
+/* 일반 아이디 중복확인 */
 #id_button{
 	height:35px; 
 	padding: 0px 19px;
@@ -41,6 +43,7 @@
 	background: #7B977A;
 	cursor: pointer;
 }
+/* 일반 비밀번호 */
 #memberPw{
 	width:250px;
 	height:35px; 
@@ -48,6 +51,7 @@
 	font-size: 9px;
 	border: 1px solid #7B977A;
 }
+/* 일반 비밀번호 확인 */
 #pwChk{
 	width:250px;
 	height:35px; 
@@ -55,6 +59,7 @@
 	font-size: 9px;
 	border: 1px solid #7B977A;
 }
+/* 판매자 비밀번호 확인 */
 #pwChkSeller{
 	width:250px;
 	height:35px; 
@@ -62,9 +67,35 @@
 	font-size: 9px;
 	border: 1px solid #7B977A;
 }
+/* 비밀번호 표시 */
 #pwCheckbox{
 	background: #7B977A;
 }
+/* 비밀번호 표시 아이콘 */
+input[type=checkbox]{
+	-webkit-appearance: none;
+}
+input[type=checkbox] + label{
+    line-height: 37px;
+    vertical-align: middle;
+	background: url("/takeit/img/icon/eye2.png");
+	cursor: pointer;
+	width: 20px;
+	height: 20px;
+	display: inline-block;
+	background-size: 100%;
+}
+input[type=checkbox]:checked + label{
+	line-height: 37px;
+    vertical-align: middle;
+	background: url("/takeit/img/icon/eye.png");
+	cursor: pointer;
+	width: 20px;
+	height: 20px;
+	display: inline-block;
+	background-size: 100%;
+}
+/* 이름 */
 #name{
 	width:250px;
 	height:35px; 
@@ -72,6 +103,7 @@
 	font-size: 9px;
 	border: 1px solid #7B977A;
 }
+/* 이메일 */
 #email{
 	width:250px;
 	height:35px; 
@@ -79,6 +111,7 @@
 	font-size: 9px;
 	border: 1px solid #7B977A;
 }
+/* 이메일 중복확인 */
 #email_button{
 	height:35px; 
 	padding: 0px 19px;
@@ -88,6 +121,7 @@
 	background: #7B977A;
 	cursor: pointer;
 }
+/* 휴대폰 */
 #mobile{
 	width:250px;
 	height:35px; 
@@ -96,6 +130,7 @@
 	border: 1px solid #7B977A;
 	
 }
+/* 휴대폰 인증번호 input */
 #mobileNum{
 	width:250px;
 	height:35px; 
@@ -104,6 +139,7 @@
 	border: 1px solid #7B977A;
 	
 }
+/* 휴대폰 인증번호 button */
 #mobile_button{
 	height:35px; 
 	padding: 0px 19px;
@@ -113,6 +149,7 @@
 	background: #7B977A;
 	cursor: pointer;
 }
+/* 우편번호 */
 #postNo{
 	width:250px;
 	height:35px; 
@@ -121,6 +158,7 @@
 	border: 1px solid #7B977A;
 	
 }
+/* 우편번호 button */
 #postNoBtn{
 	height:35px; 
 	padding: 0px 19px;
@@ -130,6 +168,7 @@
 	background: #7B977A;
 	cursor: pointer;
 }
+/* 도로명주소 */
 #address{
 	width:250px;
 	height:35px; 
@@ -137,6 +176,7 @@
 	font-size: 9px;
 	border: 1px solid #7B977A;
 }
+/* 상세주소 */
 #addressDetail{
 	width:250px;
 	height:35px; 
@@ -144,6 +184,7 @@
 	font-size: 9px;
 	border: 1px solid #7B977A;
 }
+/* 생일 */
 #brith{
 	width:250px;
 	height:35px; 
@@ -151,6 +192,7 @@
 	font-size: 9px;
 	border: 1px solid #7B977A;
 }
+/* 일반회원가입 */
 #normalSubmit{
 	width:50%;
 	height:35px; 
@@ -162,9 +204,8 @@
 	margin-top: 10px;	
 	cursor: pointer;
 }
-/* 일반회원 데이터 끝*/
 
-/* 판매자 회원가입  폼 */
+/* 판매자 회원가입  폼  : 사용안함 */
 #seller_inputForm{
 	width: 315px;
 	height: 60px; 
@@ -176,7 +217,7 @@
 	margin-top: 20px;
 	cursor: pointer;
 }
-/* 판매자회원 데이터 시작*/
+/* 판매자 아이디 */
 #sellerId{
 	width:250px;
 	height:35px; 
@@ -184,6 +225,7 @@
 	font-size: 9px;
 	border: 1px solid #7B977A;
 }
+/* 판매자 비밀번호 */
 #sellerPw{
 	width:250px;
 	height:35px; 
@@ -191,6 +233,7 @@
 	font-size: 9px;
 	border: 1px solid #7B977A;
 }
+/* 판매자 비밀번호 확인 */
 #sellerPw_chk{
 	width:250px;
 	height:35px; 
@@ -198,6 +241,7 @@
 	font-size: 9px;
 	border: 1px solid #7B977A;
 }
+/* 상점구역번호  */
 #shopLocCode{
 	width:290px;
 	height:37px; 
@@ -205,6 +249,7 @@
 	font-size: 9px;
 	border: 1px solid #7B977A;
 }
+/* 사업자등록번호 */
 #sellerNo{
 	width:250px;
 	height:35px; 
@@ -212,6 +257,7 @@
 	font-size: 9px;
 	border: 1px solid #7B977A;
 }
+/* 사업자등록번호 중복확인 button */
 #sellerNoBtn{
 	height:35px; 
 	padding: 0px 19px;
@@ -221,6 +267,7 @@
 	background: #7B977A;
 	cursor: pointer;
 }
+/* 상점 휴대폰 */
 #shopMobile{
 	width:250px;
 	height:35px; 
@@ -228,6 +275,7 @@
 	font-size: 9px;
 	border: 1px solid #7B977A;
 }
+/* 상점명 */
 #shopName{
 	width:250px;
 	height:35px; 
@@ -235,6 +283,7 @@
 	font-size: 9px;
 	border: 1px solid #7B977A;
 }
+/* 상점명 중복확인 button */
 #shopNameBtn{
 	height:35px; 
 	padding: 0px 19px;
@@ -244,6 +293,7 @@
 	background: #7B977A;
 	cursor: pointer;
 }
+/* 판매자 카카오톡 아이디*/
 #shopKakaoId{
 	width:250px;
 	height:35px; 
@@ -251,6 +301,7 @@
 	font-size: 9px;
 	border: 1px solid #7B977A;
 }
+/* 상점 이미지 */
 #shopImg{
 	width:250px;
 	height:35px; 
@@ -259,6 +310,7 @@
 	border: 1px solid #7B977A;
 	line-height: 35px;
 }
+/* 카테고리번호 */
 #shopCategoryNo{
 	width:290px;
 	height:37px; 
@@ -266,6 +318,7 @@
 	font-size: 9px;
 	border: 1px solid #7B977A;
 }
+/* 판매자 회원가입 submit */
 #sellerSubmit{
 	width:50%;
 	height:35px; 
@@ -277,8 +330,6 @@
 	margin-top: 10px;	
 	cursor: pointer;
 }
-/* 판매자회원 데이터 끝*/
-
 /* 회원가입 유효성검사 결과 */
 .inputResult {
 	font-size:12px;

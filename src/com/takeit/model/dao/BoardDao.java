@@ -16,8 +16,10 @@ import com.takeit.model.dto.Category;
 import com.takeit.model.dto.MessageEntity;
 
 /**
- * @author 한소희
- *
+ * 게시글 dao
+ * @author 	한소희
+ * @since	jdk1.8
+ * @version v2.0
  */
 public class BoardDao {
 	private static BoardDao instance = new BoardDao();
@@ -54,7 +56,6 @@ public class BoardDao {
 				dto.setBoardCategory(rs.getString("BOARD_CATEGORY_NO"));
 				dto.setBoardCategoryName(rs.getString("BOARD_CATEGORY"));
 				dto.setBoardViews(rs.getInt("BOARD_VIEWS"));
-				dto.setBoardPicks(rs.getInt("BOARD_PICKS"));
 				dto.setBoardDate(rs.getString("BOARD_DATE"));
 				
 				boardList.add(dto);
@@ -73,6 +74,44 @@ public class BoardDao {
 		}
 		JdbcTemplate.close(rs);
 		JdbcTemplate.close(pstmt);
+	}
+	
+	/**게시글 갯수 구하기*/
+	public int boardCount(Connection con, String categoryNo) throws CommonException {
+		System.out.println("[debug] 게시판 dao 목록 갯수 요청");
+		String sql = "SELECT COUNT(*) FROM BOARD B, BOARD_CATEGORY BC "
+				+ "WHERE B.BOARD_CATEGORY_NO=BC.BOARD_CATEGORY_NO "
+				+ "AND B.BOARD_CATEGORY_NO = ? "
+				+ "ORDER BY B.BOARD_DATE DESC";
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int cnt = 0;
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, categoryNo);
+			rs= pstmt.executeQuery();
+			
+			if(rs.next()) {
+			cnt = rs.getInt(1);
+				System.out.println("[debug] 게시판 dao 목록 갯수 요청 완료");
+			}
+			
+		} catch (SQLException e) {
+			System.out.println("[debug] 게시판 dao 목록 갯수 요청 실패");
+			System.out.println(e.getMessage());
+			e.printStackTrace();
+			
+			MessageEntity message = new MessageEntity("error",16);
+			message.setLinkTitle("메인으로");
+			message.setUrl("/takeit/index");
+			throw new CommonException(message);
+		} finally {
+			JdbcTemplate.close(rs);
+			JdbcTemplate.close(pstmt);
+		}
+		return cnt;
 	}
 	
 	/***
@@ -105,7 +144,6 @@ public class BoardDao {
 				board.setBoardCategoryName(rs.getString("board_category"));
 				board.setBoardCategory(rs.getString("board_category_no"));
 				board.setBoardViews(rs.getInt("board_views"));
-				board.setBoardPicks(rs.getInt("board_picks"));
 				board.setBoardDate(rs.getString("board_date"));
 				board.setBoardContents(rs.getString("board_contents"));
 				
@@ -248,7 +286,6 @@ public class BoardDao {
 				board.setBoardCategoryName(rs.getString("board_category"));
 				board.setBoardCategory(rs.getString("board_category_no"));
 				board.setBoardViews(rs.getInt("board_views"));
-				board.setBoardPicks(rs.getInt("board_picks"));
 				board.setBoardDate(rs.getString("board_date"));
 				board.setBoardContents(rs.getString("board_contents"));
 				
@@ -329,6 +366,54 @@ public class BoardDao {
 		} finally {
 			JdbcTemplate.close(pstmt);
 		}
+		
+	}
+	
+	/**게시글 검색결과 조회*/
+	public void getBoardSearchList(Connection con, String boardCategory, String boardSearch, String searchInput,
+			ArrayList<Board> boardList) throws CommonException{
+		System.out.println("[debug] 게시판 dao 검색결과 요청");
+		String sql = "SELECT DISTINCT * FROM BOARD B LEFT OUTER JOIN BOARD_CATEGORY BC "
+				+ "ON (B.BOARD_CATEGORY_NO=BC.BOARD_CATEGORY_NO) "
+				+ "WHERE B.BOARD_CATEGORY_NO = ? "
+				+ "AND B.BOARD_WRITER LIKE ? "
+				+ "OR B.BOARD_TITLE LIKE ? "
+				+ "OR B.BOARD_CONTENTS LIKE ? "
+				+ "OR B.ITEM_NO LIKE ?"
+				+ "ORDER BY B.BOARD_DATE DESC";
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, boardCategory);
+			pstmt.setString(2, searchInput);
+			pstmt.setString(3, searchInput);
+			pstmt.setString(4, searchInput);
+			pstmt.setString(5, searchInput);
+			rs= pstmt.executeQuery();
+			
+			while(rs.next()) {
+				Board dto = new Board();
+				dto.setBoardNo(rs.getString("BOARD_NO"));
+				dto.setBoardTitle(rs.getString("BOARD_TITLE"));
+				dto.setBoardWriter(rs.getString("BOARD_WRITER"));
+				dto.setBoardCategory(rs.getString("BOARD_CATEGORY_NO"));
+				dto.setBoardCategoryName(rs.getString("BOARD_CATEGORY"));
+				dto.setBoardViews(rs.getInt("BOARD_VIEWS"));
+				dto.setBoardDate(rs.getString("BOARD_DATE"));
+				
+				boardList.add(dto);
+				System.out.println("[debug] 게시판 dao 검색결과 요청 완료");
+			}
+			
+		} catch (SQLException e) {
+			System.out.println("[debug] 게시판 dao 검색결과 요청 실패");
+			System.out.println(e.getMessage());
+			e.printStackTrace();
+		}
+		JdbcTemplate.close(rs);
+		JdbcTemplate.close(pstmt);
 		
 	}
 

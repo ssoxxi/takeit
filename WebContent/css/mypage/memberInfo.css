@@ -3,16 +3,14 @@
 #myInfo_table table,#myInfo_table th,  #myInfo_table td , #myInfo_table tr{
 	
 	border: solid 1px #8D959C;
-		margin: 0 auto;
-		border-collapse: collapse;
-		padding: 5px;
-		width: 1050px;
-		margin-top: 30px;
-		margin-bottom: 20px;
-	
+	margin: 0 auto;
+	border-collapse: collapse;
+	padding: 5px;
+	width: 1050px;
+	margin-top: 30px;
+	margin-bottom: 20px;
 	
 }
-
 
 #myInfo_table th {
 	width:130px;
@@ -22,13 +20,10 @@
 	width: 400px;
 }
 
-
 #myInfo_table{
 	width: 500px;
 	margin: 0 auto;
 }
-
-
 
 #mypage_Btn{
 	text-align: center;
@@ -44,11 +39,6 @@
 	background-color: #fff;
 	margin-top: 30px;
 }
-
-
-
-
-
 
 #mypage_Btn:hover{
 	background-color: #5a7d59;
@@ -67,16 +57,11 @@
 	cursor: pointer;
 }
 #addressDetail{
-	
 	width:250px;
-	
 }
 #address{
-	
 	width:250px;
-	
 }
-
 
 .updateBtn{
 	width: 450px;
@@ -87,5 +72,42 @@
 	color: white;
 	background: #7B977A;
 	cursor: pointer;
-    
+}
+
+.myPage_menu_aside {
+	width: 200px;
+	height: 600px;
+	float: left;
+	margin-top: 100px;
+}
+
+.myPage_menu_aside ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 200px;
+    background-color: #f1f1f1;
+}
+.myPage_menu_aside li a {
+    display: block;
+    color: #001;
+    padding: 8px 16px;
+    text-decoration: none;
+}
+.myPage_menu_aside h3.active {
+    background-color: #5a7d59;
+    color: white;
+}
+.myPage_menu_aside li a:hover:not(.active) {
+    background-color: #5a7d59;
+    color: white;
+} 
+
+/**사이드바*/
+.side-menu{
+	margin-right: 50px;
+}
+
+#container{
+	display: flex;
 }

@@ -8,6 +8,10 @@ import com.takeit.common.JdbcTemplate;
 import com.takeit.model.dao.CartDao;
 import com.takeit.model.dto.Cart;
 
+/**
+ * 장바구니 서비스
+ * @author 한소희
+ */
 public class CartBiz {
 	private CartDao dao = CartDao.getInstance();
 
@@ -79,6 +83,35 @@ public class CartBiz {
 		} catch (CommonException e) {
 			JdbcTemplate.rollback(con);
 			System.out.println("[debug] 장바구니 수량변경 dao 요청 실패");
+			throw e;
+		} finally {
+			JdbcTemplate.close(con);
+		}
+		
+	}
+
+	/**장바구니 아이템 중복 검사*/
+	public int searchCartItem(String itemNo, String memberId) throws CommonException {
+		Connection con = JdbcTemplate.getConnection();
+		try {
+			return dao.searchCartItem(con, itemNo, memberId);
+		} catch (CommonException e) {
+			throw e;
+		} finally {
+			JdbcTemplate.close(con);
+		}
+	}
+
+	/**장바구니 수량 변경 추가*/
+	public void cartUpdate(Cart cart) throws CommonException{
+		Connection con = JdbcTemplate.getConnection();
+		try {
+			dao.cartUpdate(con, cart);
+			JdbcTemplate.commit(con);
+			System.out.println("[debug] 장바구니 수량변경 추가 dao 요청 완료");
+		} catch (CommonException e) {
+			JdbcTemplate.rollback(con);
+			System.out.println("[debug] 장바구니 수량변경 추가 dao 요청 실패");
 			throw e;
 		} finally {
 			JdbcTemplate.close(con);

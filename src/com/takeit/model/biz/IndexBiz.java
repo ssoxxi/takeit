@@ -16,6 +16,7 @@ import com.takeit.model.dto.Item;
 import com.takeit.model.dto.Review;
 
 /**
+ * 시작페이지 서비스
  * @author 한소희
  *
  */

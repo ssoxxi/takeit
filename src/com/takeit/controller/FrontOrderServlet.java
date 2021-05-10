@@ -71,13 +71,16 @@ public class FrontOrderServlet extends HttpServlet {
 		case "orderForm":
 			orderForm(request, response);
 			break;
+		default:
+			response.sendRedirect(CONTEXT_PATH + "/index");
+			break;
 		}
 	}
 	
-	/** 주문등록화면 요청 서비스 */
+	/** 주문 등록 화면 요청 서비스 */
 	protected void orderForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession(false);
-		if (session.getAttribute("dto") == null) {
+		if (session == null || session.getAttribute("dto") == null) {
 			MessageEntity message = new MessageEntity("message", 0);
 			message.setLinkTitle("로그인");
 			message.setUrl(CONTEXT_PATH + "/member/memberLogin.jsp");
@@ -92,7 +95,6 @@ public class FrontOrderServlet extends HttpServlet {
 		String[] itemNos = request.getParameterValues("itemNo");
 		String[] itemQtys = request.getParameterValues("itemQty");
 		String[] itemPayPrices = request.getParameterValues("itemPrice");
-		//String[] totalPrices = request.getParameterValues("totalPrice");
 		
 		Order order = new Order();
 		ArrayList<OrderDetail> orderDetails = new ArrayList<>();
@@ -130,7 +132,7 @@ public class FrontOrderServlet extends HttpServlet {
 	/** 일반회원 주문등록 요청 서비스 */
 	protected void order(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession(false);
-		if (session.getAttribute("dto") == null) {
+		if (session == null || session.getAttribute("dto") == null) {
 			MessageEntity message = new MessageEntity("message", 0);
 			message.setLinkTitle("로그인");
 			message.setUrl(CONTEXT_PATH + "/member/memberLogin.jsp");
@@ -138,7 +140,7 @@ public class FrontOrderServlet extends HttpServlet {
 			request.getRequestDispatcher("/message.jsp").forward(request, response);
 			return;
 		}
-		if (session.getAttribute("memberId") == null) {
+		if (session == null || session.getAttribute("memberId") == null) {
 			MessageEntity message = new MessageEntity("message", 1);
 			message.setLinkTitle("메인으로");
 			message.setUrl(CONTEXT_PATH + "/index");
@@ -174,6 +176,11 @@ public class FrontOrderServlet extends HttpServlet {
 		ArrayList<OrderDetail> orderDetails = null;
 		OrderDetail orderDetail = null;
 		for (int index = 0; index < itemNos.length; index++) {
+			System.out.println(itemNos[index]);
+			System.out.println(sellerIds[index]);
+			System.out.println(itemPayPrices[index]);
+			System.out.println(itemQtys[index]);
+			
 			order = new Order();
 			orderDetails = new ArrayList<>();
 			orderDetail = new OrderDetail();
@@ -190,7 +197,6 @@ public class FrontOrderServlet extends HttpServlet {
 				}
 			}
 			if (orderDetails.isEmpty()) {
-				orderDetail = new OrderDetail();
 				orderDetail.setSellerId(sellerIds[index]);
 				orderDetail.setItemNo(itemNos[index]);
 				orderDetail.setItemQty(Integer.valueOf(itemQtys[index]));
@@ -213,7 +219,7 @@ public class FrontOrderServlet extends HttpServlet {
 				order.setShipStatusCode(shipStatusCode);
 				
 				orderList.add(order);
-			}
+			} 
 		}
 		OrderBiz biz = new OrderBiz();
 		try {
@@ -232,7 +238,7 @@ public class FrontOrderServlet extends HttpServlet {
 	/** 배송상태변경 요청 서비스 */
 	protected void updateShipStatus(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession(false);
-		if (session.getAttribute("dto") == null) {
+		if (session == null || session.getAttribute("dto") == null) {
 			MessageEntity message = new MessageEntity("message", 0);
 			message.setLinkTitle("로그인");
 			message.setUrl(CONTEXT_PATH + "/member/memberLogin.jsp");
@@ -262,7 +268,7 @@ public class FrontOrderServlet extends HttpServlet {
 	/**	배송상태변경 화면 요청 서비스 */
 	protected void updateShipStatusForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession(false);
-		if (session.getAttribute("dto") == null) {
+		if (session == null || session.getAttribute("dto") == null) {
 			MessageEntity message = new MessageEntity("message", 0);
 			message.setLinkTitle("로그인");
 			message.setUrl(CONTEXT_PATH + "/member/memberLogin.jsp");
@@ -292,7 +298,7 @@ public class FrontOrderServlet extends HttpServlet {
 	/** 판매자회원의 주문취소 요청 서비스 */
 	protected void orderCancel(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession(false);
-		if (session.getAttribute("dto") == null) {
+		if (session == null || session.getAttribute("dto") == null) {
 			MessageEntity message = new MessageEntity("message", 0);
 			message.setLinkTitle("로그인");
 			message.setUrl(CONTEXT_PATH + "/member/memberLogin.jsp");
@@ -305,8 +311,8 @@ public class FrontOrderServlet extends HttpServlet {
 		
 		if (orderNo == null || orderNo.trim().length() == 0) {
 			MessageEntity message = new MessageEntity("error", 12);
-			message.setLinkTitle("마이페이지");
-			//message.setUrl(CONTEXT_PATH + "/order/orderController?action=");
+			message.setLinkTitle("판매목록");
+			message.setUrl(CONTEXT_PATH + "/order/orderController?action=sellerOrderList");
 			request.setAttribute("message", message);
 			request.getRequestDispatcher("/message.jsp").forward(request, response);
 			return;
@@ -321,11 +327,6 @@ public class FrontOrderServlet extends HttpServlet {
 			
 		} catch (CommonException e) {
 			response.getWriter().write("failed");
-			MessageEntity message = e.getMessageEntity();
-			message.setLinkTitle("마이페이지");
-			//message.setUrl(CONTEXT_PATH + "/order");
-			request.setAttribute("message", message);
-			request.getRequestDispatcher("/message.jsp").forward(request, response);
 			return;
 		}
 	}
@@ -333,7 +334,7 @@ public class FrontOrderServlet extends HttpServlet {
 	/** 일반회원의 주문취소요청 요청 서비스 */
 	protected void orderCancelRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession(false);
-		if (session.getAttribute("dto") == null) {
+		if (session == null || session.getAttribute("dto") == null) {
 			MessageEntity message = new MessageEntity("message", 0);
 			message.setLinkTitle("로그인");
 			message.setUrl(CONTEXT_PATH + "/member/memberLogin.jsp");
@@ -347,7 +348,7 @@ public class FrontOrderServlet extends HttpServlet {
 		if (orderNo == null || orderNo.trim().length() == 0) {
 			MessageEntity message = new MessageEntity("error", 12);
 			message.setLinkTitle("마이페이지");
-			//message.setUrl(CONTEXT_PATH + "/order/orderController?action=");
+			message.setUrl(CONTEXT_PATH + "/member/myPage.jsp");
 			request.setAttribute("message", message);
 			request.getRequestDispatcher("/message.jsp").forward(request, response);
 			return;
@@ -362,18 +363,18 @@ public class FrontOrderServlet extends HttpServlet {
 		} catch (CommonException e) {
 			response.getWriter().write("failed");
 			MessageEntity message = e.getMessageEntity();
-			message.setLinkTitle("마이페이지");
-			//message.setUrl(CONTEXT_PATH + "/");
+			message.setLinkTitle("주문내역");
+			message.setUrl(CONTEXT_PATH + "/order/orderController?action=memberOrderList");
 			request.setAttribute("message", message);
 			request.getRequestDispatcher("/message.jsp").forward(request, response);
 			return;
 		}
 	}
 
-	/** 일반회원의 주문목록 조회 */
+	/** 일반회원의 주문목록 요청 서비스 */
 	protected void memberOrderList(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession(false);
-		if (session.getAttribute("dto") == null) {
+		if (session == null || session.getAttribute("dto") == null) {
 			MessageEntity message = new MessageEntity("message", 0);
 			message.setLinkTitle("로그인");
 			message.setUrl(CONTEXT_PATH + "/member/memberLogin.jsp");
@@ -390,8 +391,12 @@ public class FrontOrderServlet extends HttpServlet {
 		try {
 			biz.getMemberOrderList(memberId, orderList);
 			
-			request.setAttribute("orderList", orderList);
-			request.getRequestDispatcher("/order/memberOrderList.jsp").forward(request, response);
+			if(!orderList.isEmpty()){
+				request.setAttribute("orderList", orderList);
+				request.getRequestDispatcher("/order/memberOrderList.jsp").forward(request, response);
+			}else {
+				response.sendRedirect("/takeit/order/noOrderList.jsp");
+			}
 		} catch (CommonException e) {
 			MessageEntity message = e.getMessageEntity();
 			message.setLinkTitle("메인으로");
@@ -401,10 +406,10 @@ public class FrontOrderServlet extends HttpServlet {
 		}
 	}
 	
-	/** 판매자회원의 주문 목록 조회 */
+	/** 판매자회원의 주문 목록 요청 서비스 */
 	protected void sellerOrderList(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession(false);
-		if (session.getAttribute("dto") == null) {
+		if (session == null || session.getAttribute("dto") == null) {
 			MessageEntity message = new MessageEntity("message", 0);
 			message.setLinkTitle("로그인");
 			message.setUrl(CONTEXT_PATH + "/member/memberLogin.jsp");
@@ -412,7 +417,6 @@ public class FrontOrderServlet extends HttpServlet {
 			request.getRequestDispatcher("/message.jsp").forward(request, response);
 			return;
 		}
-		
 		
 		String sellerId = (String)session.getAttribute("sellerId");
 		
@@ -432,6 +436,4 @@ public class FrontOrderServlet extends HttpServlet {
 			request.getRequestDispatcher("/message.jsp").forward(request, response);
 		}
 	}
-	
-	
 }

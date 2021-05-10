@@ -5,40 +5,34 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>상품주문 폼</title>
+<title>상품주문</title>
 <link type="text/css" rel="stylesheet" href="/takeit/css/link.css">
 <link type="text/css" rel="stylesheet" href="/takeit/css/order.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script type="text/javascript" src="/takeit/js/takeit/order.js"></script>
 <script type="text/javascript">
-$(document).ready(function() {
-	$("#receiveMethod1").click(function() {
-		$("#recipientName").val("${order.recipientName}");
-		$("#recipientMobile").val("${order.recipientMobile}");
-		$("#recipientPostNo").val("${order.recipientPostNo}").attr("disabled", false);
-		$("#recipientAddr").val("${order.recipientAddr}").attr("disabled", false);
-		$("#recipientAddrDetail").val("${order.recipientAddrDetail}").attr("disabled", false);
-		$("#shipRequest").val("${order.shipRequest}").attr("disabled", false);
+	$(document).ready(function() {
+		$("#receiveMethod1").click(function() {
+			$("#recipientName").val("${order.recipientName}");
+			$("#recipientMobile").val("${order.recipientMobile}");
+			$("#recipientPostNo").val("${order.recipientPostNo}").attr("disabled", false);
+			$("#recipientAddr").val("${order.recipientAddr}").attr("disabled", false);
+			$("#recipientAddrDetail").val("${order.recipientAddrDetail}").attr("disabled", false);
+			$("#shipRequest").val("${order.shipRequest}").attr("disabled", false);
+		});
 	});
-	$("#receiveMethod2").click(function() {
-		$("#recipientName").val("");
-		$("#recipientMobile").val("");
-		$("#recipientPostNo").val("").attr("disabled", false);
-		$("#recipientAddr").val("").attr("disabled", false);
-		$("#recipientAddrDetail").val("").attr("disabled", false);
-		$("#shipRequest").val("").attr("disabled", false);
-	});
-	$("#receiveMethod3").click(function() {
-		$("#recipientPostNo").val("").attr("disabled", true);
-		$("#recipientAddr").val("").attr("disabled", true);
-		$("#recipientAddrDetail").val("").attr("disabled", true);
-		$("#shipRequest").val("").attr("disabled", true);
-	});
-});
-	
 </script>
+
 </head>
 <body>
-
+<c:if test="${empty dto}">
+	<jsp:useBean id="message" class="com.takeit.model.dto.MessageEntity" scope="request" />
+	<jsp:setProperty property="type" name="message" value="message"/>
+	<jsp:setProperty property="index" name="message" value="0"/>
+	<jsp:setProperty property="url" name="message" value="${CONTEXT_PATH}/index"/>
+	<jsp:setProperty property="linkTitle" name="message" value="처음으로"/>
+	<jsp:forward page="/message.jsp"/>
+</c:if>
 <!-- 상단 메뉴 -->
 <c:if test="${empty memberId and empty sellerId}">
 	<!-- 로그인 전 메뉴 -->
@@ -82,17 +76,19 @@ $(document).ready(function() {
 				<span><b>배송요청사항</b></span>
 			</div>
 			<div class="recipient-info" style="margin-left: 10px;">
-				<span><input type="text" name="recipientName"  class="recipient-receiveMethod" value="${order.recipientName}"></span><br>
-				<span><input type="text" name="recipientMobile"  class="recipient-receiveMethod" value="${order.recipientMobile}"></span><br>
-				<span><input type="text" id="recipientPostNo"  class="recipient-receiveMethod" name="recipientPostNo" value="${order.recipientPostNo}"></span><br>
-				<input type="text" id="recipientAddr" name="recipientAddr"  class="recipient-receiveMethod" value="${order.recipientAddr}"><br>
-				<input type="text" id="recipientAddrDetail" name="recipientAddrDetail"  class="recipient-receiveMethod" value="${order.recipientAddrDetail}"><br>
+
+				<span><input type="text" id="recipientName" name="recipientName"  class="recipient-receiveMethod" value="${order.recipientName}" ></span><br>
+				<span><input type="text" id="recipientMobile" name="recipientMobile"  class="recipient-receiveMethod" value="${order.recipientMobile}" ><span id="mobileResult1" class="orderResult"></span></span><br>
+				<span><input type="text" id="recipientPostNo" readonly="readonly"  class="recipient-receiveMethod" name="recipientPostNo" value="${order.recipientPostNo}"></span><input type="button" id="postNoBtn" name="postNoBtn" class="small-btn" onclick="goPopup();" value="주소검색" /> <br>
+				<span><input type="text" id="recipientAddr" readonly="readonly"  name="recipientAddr"  class="recipient-receiveMethod" value="${order.recipientAddr}"><span id="postNoResult1" class="orderResult"></span></span><br>
+				<span><input type="text" id="recipientAddrDetail" required="required" name="recipientAddrDetail"  class="recipient-receiveMethod" value="${order.recipientAddrDetail}"><span id="addressDetailResult1" class="orderResult"></span></span><br>
+
 				<span><input type="text" id="shipRequest" name="shipRequest"  class="recipient-receiveMethod" value="${order.shipRequest}"></span>
 			</div>
-			</div> 
+			</div>
 		</div>
 	<hr style="border-top-width: 3px;">	
-	
+<c:set var="shipPay" value="0" />	
 	<c:set var="totalPrice" value="0" scope="page"/>
 		<div class="orderList-wrap">
 		<h3>주문상품</h3><hr>
@@ -106,10 +102,14 @@ $(document).ready(function() {
 					<span><b>상품명 :</b> ${orderDetail.itemName} </span><br>
 					<span><b>상품개수 :</b> ${orderDetail.itemQty}개 </span><br>
 					<span><b>배송비 :</b>
+					
 					<c:choose>
 						<c:when test="${orderDetail.itemTakeit == 'T' }">무료(잇거래)<c:set var="totalPrice" value="${totalPrice + (orderDetail.itemQty*orderDetail.itemPayPrice) }"/></c:when>
 						<c:when test="${orderDetail.itemPayPrice * orderDetail.itemQty >= 50000}">무료<c:set var="totalPrice" value="${totalPrice + (orderDetail.itemQty*orderDetail.itemPayPrice) }"/></c:when>
-						<c:when test="${orderDetai.itemTakeit == 'F' and orderDetail.itemPayPrice * orderDetail.itemQty < 50000 }">3500원<c:set var="totalPrice" value="${totalPrice + (orderDetail.itemQty*orderDetail.itemPayPrice)+3500}"/></c:when>
+						<c:when test="${orderDetail.itemTakeit == 'F' and orderDetail.itemPayPrice * orderDetail.itemQty < 50000 }">3500원<c:set var="totalPrice" value="${totalPrice + (orderDetail.itemQty*orderDetail.itemPayPrice)}"/>
+						<c:set var="shipPay" value="3500" />
+						</c:when>
+						
 					</c:choose></span><br>
 					<span><b>상품결제금액 :</b> ${orderDetail.itemPayPrice * orderDetail.itemQty}원</span> <br> 
 				</div>
@@ -129,11 +129,11 @@ $(document).ready(function() {
 			<c:if test=""></c:if>
 			<span id="order-totPrice">
 				<b>총 주문금액 :</b> 
-				<span style="font-weight: 700; font-size:35px;  color: red;">&#8361;<fmt:formatNumber value="${totalPrice}" pattern="###,###"/></span> 
+				<span style="font-weight: 700; font-size:35px;  color: red;">&#8361;<fmt:formatNumber value="${order.orderPrice}"  pattern="###,###"/></span> 
 			</span>
-			<input type="submit" class="link" value="결제하기"/>
+			<input type="submit" class="link" value="결제하기" onclick="return orderCheck()"/>
 			</div>
-<input type="hidden" value="${totalPrice}" name="orderPrice">	
+<input type="hidden" value="${order.orderPrice}" name="orderPrice">	
 	</form>
 </div>
 

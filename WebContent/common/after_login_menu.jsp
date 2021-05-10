@@ -21,4 +21,5 @@
 	<span id="pipe">|</span>
 	<a href="/takeit/board/customerCenter.jsp">고객센터</a>
 </c:if>
+
 </div>	

@@ -23,14 +23,12 @@
 }
 
 #container{
-	/* height: 600px; */
 	display: flex;
 }
 .myPage_menu_aside {
 	width: 200px;
 	height: 600px;
 	float: left;
-	/* margin-left: 200px; */
 	margin-top: 100px;
 }
 
@@ -107,31 +105,35 @@
 
 #memberList_table table,#memberList_table th,  #memberList_table td , #memberList_table tr{
 	
-		border: solid 1px #8D959C;
-		margin: 0 auto;
-		border-collapse: collapse;
-		padding: 5px;
-		width: 1050px;
-		margin-top: 30px;
-		margin-bottom: 20px;
+	border: solid 1px #8D959C;
+	margin: 0 auto;
+	border-collapse: collapse;
+	padding: 5px;
+	width: 1050px;
+	margin-top: 30px;
+	margin-bottom: 20px;
+	text-align: center;
 	
 	
 }
+#memberList_table table{
+	border: solid 1px #8D959C;
+	margin: 0 auto;
+	border-collapse: collapse;
+	padding: 5px;
+	width: 1050px;
+	margin-top: 30px;
+	margin-bottom: 20px;
+	text-align: center;
+}
 
-
-#memberList_table th {
-	width:130px;
+ #memberList_table th {
+	width:200px;
 }
 
 #memberList_table td {
-	width: 400px;
+	width: 216px;
 }
-
-
-/* #memberList_table{
-	width: 500px;
-	margin: 0 auto;
-} */
 
 #mypage_Btn{
 	text-align: center;
@@ -163,4 +165,45 @@
 	color: white;
 	background: #7B977A;
 	cursor: pointer;
+}
+
+.list-view-width {
+    width: 1450px;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+#list-container{
+	display: flex;
+}
+#memberList{
+	width: 1450px;
+	margin: 0 auto;
+}
+/**no order list*/
+#no-orderList-wrap{
+	width: 1050px;
+	margin: 0 auto;
+}
+#no-orderList{
+	display: flex;
+	
+}
+#noOrderList-title{
+	text-align: center;
+	font-size: 30px;
+	font-weight: 600;
+	margin: 0 auto;
+}
+#noOrderList-info{
+	text-align: center;
+	margin-top: 150px;
+}
+#noOrderList-info>span{
+	line-height: 52px;
+	font-size: 20px;
+	vertical-align: middle;
+}
+#no-orderList-main{
+	width: 970px;
 }

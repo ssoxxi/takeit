@@ -34,6 +34,8 @@
 	color: #35363A;
 	text-decoration: none;
 	margin: 0 5px;
+	line-height: 36px;
+	vertical-align: middle;
 }
 #top-menu>a:hover, #navi>a:hover{
 	font-weight: 700;
@@ -117,4 +119,17 @@ input[type="submit"]{
 	width: fit-content;
 	margin: 0 auto;
 	font-size: 30px;
+}
+/**페이징*/
+#paging{
+	width: fit-content;
+	margin: 20px auto;
+	font-size: 15px;
+}
+#paging>a, #paging>span>a {
+	color: black;
+}
+#paging>a:hover, #paging>span>a:hover{
+	font-weight: 700;
+	color: #fe4b03;
 }

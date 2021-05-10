@@ -37,7 +37,7 @@
 		<div id="title">
 			<h3 style="margin-bottom: 0;">REVIEW</h3>
 		</div>
-		<div id="small-btn">
+		<div id="small-btn" style="width: 800px;">
 			<a href="/takeit/item/reviewController?action=enrollReviewForm">등록</a>
 		</div>
 	</div>

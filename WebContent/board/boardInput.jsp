@@ -24,17 +24,35 @@
 </style>
 <script type="text/javascript">
 	$(document).ready(function(){
-		if(	$("#boardCategory option:selected").val() != '3'){
-			$("#itemNo").val(null);
-			$("#itemNo").attr("readonly",true);
+		
+		if ($("#itemNo").val() == "null") {
+			$("#itemNo").attr("readonly", false).val("");
 		} else {
-			$("#itemNo").attr("readonly",false);
+			$("#itemNo").attr("readonly", true);
 		}
+		
+		
+		$("#boardCategory").on('change',function(){
+			var itemNo = this.value;
+			if(itemNo === '3'){
+				$("#itemNo").attr("readonly",false);
+				$("#itemNo").focus();
+			} else {
+				$("#itemNo").attr("readonly",true);
+			}
+		});
 		
 		$("#cancle").on("click", function(){
 			history.back();
-		})
-	});
+		});
+		
+		if ($("#itemNo").val() == "null") {
+			$("#itemNo").attr("readonly", false).val("");
+		} else {
+			$("#itemNo").attr("readonly", true);
+		}
+});
+
 	
 </script>
 </head>
@@ -59,31 +77,40 @@
 <table>
 	<tr>
 		<th>글제목</th>
-		<td><input type="text" name="boardTitle" placeholder="제목을 입력하세요.."> </td>
+		<td><input type="text" name="boardTitle" class="boardInput" placeholder="제목을 입력하세요.."> </td>
 		<th>카테고리</th>
 		<td>
-			<select id="boardCategory" name="boardCategory">
+			<select id="boardCategory" name="boardCategory" class="boardInput">
 		<%
 			ArrayList<Category> categoryList =(ArrayList<Category>)request.getAttribute("category");
-			for(Category dto : categoryList){
+			for(Category cate : categoryList){
+				if(cate.getCategoryNo().equals("1")&&!(session.getAttribute("memberId").equals("admin"))||
+						cate.getCategoryNo().equals("2")&&!(session.getAttribute("memberId").equals("admin"))){
+					continue;
+				}
 		%>
-			<option value="<%= dto.getCategoryNo() %>"><%= dto.getCategoryName() %></option>
+
+			<option value="<%= cate.getCategoryNo() %>"><%= cate.getCategoryName() %></option>
+
 		<% } %>
 		</select>
 	</td>
 	</tr>
 	<tr>
 		<th>작성자</th>
-		<td><input type="text" name="boardWriter" value="${memberId }" readonly="readonly"></td>
+		<td><input type="text" name="boardWriter" id="boardWriter" class="boardInput" value="${memberId}" readonly="readonly"></td>
+		<%
+			String itemNo = request.getParameter("itemNo");
+		%>
 		<th >상품번호</th>
-		<td><input type="text" id="itemNo" name="itemNo" placeholder="상품번호(예:FR0709)"></td>
+		<td><input type="text" id="itemNo" class="boardInput" name="itemNo" placeholder="상품번호(예:FR000709)" value="<%=itemNo%>" readonly="readonly"></td>
 	</tr>
 	<tr>
 		<th colspan="4">내용</th>
 	</tr>
 	<tr>
 		<td colspan="4">
-			<textarea rows="30" cols="100" name="boardContents" placeholder="내용을 입력하세요.."></textarea>
+			<textarea id="boardInput" name="boardContents" placeholder="내용을 입력하세요.."></textarea>
 		</td>
 	</tr>
 </table>

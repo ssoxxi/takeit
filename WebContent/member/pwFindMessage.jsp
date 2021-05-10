@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <title>findMessage</title>
 <link type="text/css" rel="stylesheet" href="/takeit/css/link.css">
+<link type="text/css" rel="stylesheet" href="/takeit/css/member/find.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 </head>
 
@@ -32,16 +33,20 @@
 
 
 <!-- contents -->
-<div id="contents">
-<h3 align="center">임시비밀번호 발급</h3><br>	
-<table id="table_logds" border="1px" align="center" cellspacing = 5>
-	<tr>
-		<td>회원님의 임시비밀번호 입니다.</td>
-	</tr>
-	<tr>
-		<td>${pwInfo}</td>
-	</tr>	
-</table>
+<div class="view-width">
+	<div id="title">
+		<h3>임시비밀번호 발급</h3>
+	</div>
+	<div id="find-table">	
+		<table id="table_logds" class="find-table">
+			<tr class="find-table">
+				<td class="find-table">회원님의 임시비밀번호 입니다.</td>
+			</tr>
+			<tr class="find-table">
+				<td class="find-table" style="text-align: center; font-weight: 700;">${pwInfo}</td>
+			</tr>	
+		</table>
+	</div>
 </div>
 <hr/>
 <!-- scroll function -->

@@ -17,12 +17,14 @@ import com.takeit.model.dto.Search;
 
 /**
  * 게시판 관리 컨트롤러
+ * @author 	한소희
+ * @since	jdk1.8
+ * @version v2.0
  */
 @WebServlet("/searchController")
 public class FrontSearchServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
      
-	//서버 구동시에 해당 어플리케이션당 한 개의 환경설정, 모든 서블릿(jsp)공유객체, 서버 종료시까지 사용
 	public ServletContext application;
 	public String CONTEXT_PATH;
 	
@@ -39,16 +41,9 @@ public class FrontSearchServlet extends HttpServlet {
 		case "searchList":
 			searchList(request,response);
 			break;
-//		case "":
-//			(request,response);
-//			break;
-//		case "":
-//			(request,response);
-//			break;
-//		case "":
-//			(request,response);
-//			break;
-			
+		default:
+			response.sendRedirect(CONTEXT_PATH + "/index");
+			break;
 		}
 	}
 

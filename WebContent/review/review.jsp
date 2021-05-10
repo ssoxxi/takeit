@@ -7,8 +7,21 @@
 <meta charset="UTF-8">
 <title>Take it</title>
 <link type="text/css" rel="stylesheet" href="/takeit/css/link.css">
+<link type="text/css" rel="stylesheet" href="/takeit/css/review.css">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	$("#itemNo").attr("readonly",true);
+	
+
+	if ($("#itemNo").val() == "null") {
+		$("#itemNo").attr("readonly", false).val("");
+	} else {
+		$("#itemNo").attr("readonly", true);
+	}
+});
+</script>
 </head>
 <body>
 
@@ -21,79 +34,77 @@
 	<!-- 로그인 후 메뉴 -->
 	<jsp:include page="/common/after_login_menu.jsp"></jsp:include>	
 </c:if>
+<!-- logo.jsp 삽입 -->
+<jsp:include page="/common/logo.jsp"></jsp:include>
+<!-- 네비게이션 -->
+<jsp:include page="/common/navigation.jsp"></jsp:include>
 
-	<!-- logo.jsp 삽입 -->
-	<jsp:include page="/common/logo.jsp"></jsp:include>
-	<!-- 네비게이션 -->
-	<jsp:include page="/common/navigation.jsp"></jsp:include>
-
-
-	<h3 align="center">REVIEW</h3>
-	<form action="/takeit/item/reviewController?action=enrollReview"
-		method="post" enctype="multipart/form-data">
-		<div align='center'>
-			<table id="review_table">
+<div id="review-input">
+	<div id="reviewInput-wrap" class="view-width">
+		<div id="reviewInput-title">
+		<h3>REVIEW</h3>
+		</div>
+		<form action="/takeit/item/reviewController?action=enrollReview" method="post" enctype="multipart/form-data">
+			<table id="reviewInput-table">
 				<tr>
-					<td><input type="text" name="memberId" placeholder="작성자"></td>
+					<th>작성자</th>
+					<td><input type="text" name="memberId" class="reviewInput" placeholder="작성자" value="${memberId }" readonly="readonly"></td>
 				</tr>
-
+				<%
+					String itemNo = request.getParameter("itemNo");
+				%>
 				<tr>
-					<td><input type="text" name="itemNo" placeholder="상품번호"></td>
+					<th>상품번호</th>
+					<td><input type="text" name="itemNo" id="itemNo" class="reviewInput" placeholder="상품번호" value="<%=itemNo%>" readonly="readonly"></td>
 				</tr>
 				<tr>
-					<td><input type="text" name="reviewTitle"
-						placeholder="제목을 입력해주세요"></td>
-
+					<th>글제목</th> 
+					<td><input type="text" name="reviewTitle" class="reviewInput" placeholder="제목을 입력해주세요"></td>
 				</tr>
 				<tr>
-					<td><textarea name="reviewContents" rows="13" cols="80"
-							placeholder="자세한 후기작성은 저희에게 큰 도움이 됩니다.반품/환불문의는 카톡문의로 가능합니다."></textarea>
+					<th colspan="2">내용</th>
+				</tr>
+				<tr>
+					<td colspan="2"><textarea name="reviewContents" class="reviewInput" id="reviewInput-contents"
+							placeholder="자세한 후기작성은 저희에게 큰 도움이 됩니다.반품/환불문의는 고객센터에 남겨주세요."></textarea>
 					</td>
 				</tr>
-
 				<tr>
-					<td>상품평점 : <select onchange="reviewChange(value)"
-						name="reviewScore">
-							<option value="">==평점선택==</option>
-							<option value="1">1점</option>
-							<option value="2">2점</option>
-							<option value="3">3점</option>
-							<option value="4">4점</option>
-							<option value="5">5점</option>
-							<option value="6">6점</option>
-							<option value="7">7점</option>
-							<option value="8">8점</option>
-							<option value="9">9점</option>
-							<option value="10">10점</option>
+					<th>상품평점</th>
+					<td>
+					<select onchange="reviewChange(value)" class="reviewInput"	name="reviewScore">
+						<option value="">==평점선택==</option>
+						<option value="1">1점</option>
+						<option value="2">2점</option>
+						<option value="3">3점</option>
+						<option value="4">4점</option>
+						<option value="5">5점</option>
+						<option value="6">6점</option>
+						<option value="7">7점</option>
+						<option value="8">8점</option>
+						<option value="9">9점</option>
+						<option value="10">10점</option>
 					</select>
-
 					</td>
 				</tr>
-
 				<tr>
-					<td>상품이미지 : <input type="file" name="reviewImg"
-						placeholder="상품이미지">
-					</td>
+					<th>상품이미지</th>
+					<td><input type="file" name="reviewImg" placeholder="상품이미지"></td>
 				</tr>
 			</table>
+			<span id="img-notice">구매한 상품이 아니거나 캡쳐사진은 첨부가 불가능합니다</span>
 			<br>
-		</div>
-		<div class="img_notice" align='center'>
-			<span>구매한 상품이 아니거나 캡쳐사진은 첨부가 불가능합니다</span>
-		</div>
-
-
-		<br>
-		<div id="signup" align='center'>
-
-			<input type="submit" value="후기등록"> <input type="reset" value="취소">
-
-		</div>
-	</form>
-	<!--	</div> -->
-	<!-- scroll function -->
-	<jsp:include page="/common/back_to_top.jsp"></jsp:include>
-	<!-- footer 구역 -->
-	<jsp:include page="/common/footer.jsp"></jsp:include>
+			<div id="reviewInput-btn-area">
+				<input class="link" type="submit" value="후기등록"> 
+				<input class="link" type="reset" value="취소">
+			</div>
+		</form>
+	</div>
+</div>
+<!--	</div> -->
+<!-- scroll function -->
+<jsp:include page="/common/back_to_top.jsp"></jsp:include>
+<!-- footer 구역 -->
+<jsp:include page="/common/footer.jsp"></jsp:include>
 </body>
 </html>

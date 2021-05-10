@@ -10,6 +10,10 @@ import com.takeit.model.dto.Board;
 import com.takeit.model.dto.Item;
 import com.takeit.model.dto.Search;
 
+/**
+ * 상품 검색 서비스
+ * @author 한소희
+ */
 public class SearchBiz {
 	private SearchDao dao = SearchDao.getInstance();
 
