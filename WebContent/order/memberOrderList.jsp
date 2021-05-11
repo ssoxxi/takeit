@@ -27,7 +27,7 @@ function orderCancelRequest(orderNo) {
 				$("#"+orderNo+"can").attr("disabled", true);
 				$("#"+orderNo+"message").html("(취소요청)");
 			} else {
-				alert("취소요청 실패");
+				alert("취소요청 실패"); 
 			}
 		}
 	});
