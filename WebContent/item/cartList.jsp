@@ -101,7 +101,7 @@
 				<input type="hidden" value="<%=cart.getCartItemQty()%>" name="itemQty" > 
 				<input type="hidden" value="${discPrice}" name="itemPrice" > 
 				<input type="hidden" value="${cart.discPrice}" name="totalPrice" > 
-				<input type="hidden" value="${cartTotalPrice}" name="cartTotalPrice" id="cartTotalPrice"> 				
+				<input type="hidden" value="<%= cart.getDiscPrice()*cart.getCartItemQty()+3500 %>" name="cartTotalPrice" id="cartTotalPrice"> 				
 				
 				<input type="submit" value="구매" class="small-btn" style="margin-bottom: 10px;">
 			</form>
