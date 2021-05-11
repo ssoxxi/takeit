@@ -109,8 +109,8 @@ function updateShipStatus(orderNo, shipStatusCode) {
 						<span><input id="${order.orderNo}btn2" type="button" class="small-btn" value="배송상태변경" onclick="updateShipStatus('${order.orderNo}','${order.shipStatusCode}')"/></span>
 					</c:if>
 				</span>
-				
 				<br>
+				<span><b>주소 : </b>${order.recipientAddr }</span><br>
 				<span><b>요청사항 :</b><span style="text-decoration: underline;"> ${order.shipRequest}</span></span><br>
 			</div>
 			<c:forEach var="orderDetail" items="${order.orderDetails}">

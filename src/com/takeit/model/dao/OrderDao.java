@@ -32,21 +32,22 @@ public class OrderDao {
 	 */
 	public void insertOrder(Connection conn, Order order) throws CommonException {
 		String sql = "INSERT INTO Orders VALUES(? || TO_CHAR(SYSDATE,'yymmdd') || LPAD(ORDER_SEQ.NEXTVAL, 6, '0') "
-				+ ", ?, ?, ?, ?, ?, ?, ?, 'F', 'F', ?, ?) ";
+				+ ", ?, ?, ?, ?||?, ?, ?, ?, 'F', 'F', ?, ?) ";
 		
 		PreparedStatement stmt = null;
 		try {
 			stmt = conn.prepareStatement(sql);
-			stmt.setString(1, order.getItemTakeit()); //주문번호 T/F ex)T210505000001, F21050100002
+			stmt.setString(1, order.getItemTakeit()); 
 			stmt.setString(2, order.getReceiveMethod());
 			stmt.setString(3, order.getRecipientName());
 			stmt.setString(4, order.getRecipientPostNo());
 			stmt.setString(5, order.getRecipientAddr());
-			stmt.setString(6, order.getRecipientMobile());
-			stmt.setString(7, order.getShipRequest());
-			stmt.setInt(8, order.getOrderPrice());
-			stmt.setString(9, order.getShipStatusCode());
-			stmt.setString(10, order.getMemberId());
+			stmt.setString(6, order.getRecipientAddrDetail());
+			stmt.setString(7, order.getRecipientMobile());
+			stmt.setString(8, order.getShipRequest());
+			stmt.setInt(9, order.getOrderPrice());
+			stmt.setString(10, order.getShipStatusCode());
+			stmt.setString(11, order.getMemberId());
 			
 			int row = stmt.executeUpdate();
 			if (row == 0) {
@@ -167,6 +168,7 @@ public class OrderDao {
 					orderDetails.add(orderDetail);
 					
 					order.setOrderDetails(orderDetails);
+					order.setRecipientAddr(rs.getString("recipient_Addr"));
 					order.setShipStatusCode(rs.getString("ship_status_code"));
 					order.setOrderNo(rs.getString("order_No"));
 					order.setShipStatus(rs.getString("ship_Status"));
