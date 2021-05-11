@@ -166,6 +166,7 @@ public class OrderDao {
 					orderDetail.setItemQty(rs.getInt("Item_Qty"));
 					orderDetail.setItemPayPrice(rs.getInt("item_pay_price"));
 					orderDetail.setItemImg(rs.getString("item_img"));
+					orderDetail.setItemTakeit(rs.getString("item_Takeit"));
 					orderDetails.add(orderDetail);
 					
 					order.setOrderDetails(orderDetails);
