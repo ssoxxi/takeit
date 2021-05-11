@@ -12,7 +12,6 @@ import java.io.Serializable;
  * @version v2.0
  */
 public class Item implements Serializable{
-
 	/**포장타입번호:(re789,ic789,ro123,el456),필수입력*/
 	private String packTypeNo;
 

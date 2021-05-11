@@ -14,8 +14,6 @@ import com.takeit.common.JdbcTemplate;
 import com.takeit.model.dto.MessageEntity;
 import com.takeit.model.dto.Review;
 
-
-
 /**
  * 후기
  * @author 김효원

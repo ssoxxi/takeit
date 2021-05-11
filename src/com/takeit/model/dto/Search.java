@@ -8,26 +8,34 @@ package com.takeit.model.dto;
 public class Search {
 	/** 상품 카테고리 번호, 사용자 입력(전체 카테고리에서 선택시 자동입력) */
 	private String itemCategoryNo;
+	
 	/** 상품 카테고리명, itemCategoryNo로 자동부여, 필수 */
 	private String itemCategoryName;
+	
 	/** 상품 신선도, %단위  */
 	private int freshPercent;
 
 	/** 상품 번호, 필수 */
 	private String itemNo;
+	
 	/** 상품명, 필수 */
 	private String itemName;
+	
 	/** 상품 판매가, 필수 */
 	private int itemPrice;
+	
 	/** 상품 이미지, 판매자입력, 필수 */
 	private String itemImg;
+	
 	/** 상품 할인율, 필수, %단위 */
 	private int discRate;
 	
 	/** 판매자 아이디, 사용자입력  */
 	private String sellerId;
+	
 	/** 판매자 이름, 사용자입력 */
 	private String name;
+	
 	/** 상점명, 사용자입력 */
 	private String shopName;
 

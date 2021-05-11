@@ -16,6 +16,8 @@ import com.takeit.model.dto.Shipping;
 /**
  * 주문 테이블에 대한 OrderDao 클래스
  * @author 김태경
+ * @since jdk1.8
+ * @version v2.0 2021/05/10
  */
 public class OrderDao {
 	private static OrderDao instance = new OrderDao();

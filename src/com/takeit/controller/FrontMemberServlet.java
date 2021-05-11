@@ -13,9 +13,9 @@ import javax.servlet.http.HttpSession;
 
 import com.takeit.common.CommonException;
 import com.takeit.model.biz.MemberBiz;
-import com.takeit.model.dao.MemberDao;
 import com.takeit.model.dto.Member;
 import com.takeit.model.dto.MessageEntity;
+import com.takeit.util.Utility;
 
 /**
  * 일반 회원관리 컨트롤러
@@ -42,7 +42,6 @@ public class FrontMemberServlet extends HttpServlet {
 	}
 	
 	protected void process(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html; charset=UTF-8");
 		
@@ -369,6 +368,7 @@ public class FrontMemberServlet extends HttpServlet {
 		}
 	}
 	
+	/** api 로그인 요청 서비스 */
 	protected void kakaoLogin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String memberId = request.getParameter("kakaoId");
 		
@@ -399,14 +399,15 @@ public class FrontMemberServlet extends HttpServlet {
 			rd.forward(request, response);
 		}
 	}
+	
+	/** 회원가입 화면 요청 서비스 */
 	protected void kakaoMemberInputForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String kakaoId = request.getParameter("kakaoIdInput");
-		System.out.println(kakaoId);
 		
 		String kakaoEmail = request.getParameter("kakaoEmail");
-		System.out.println(kakaoEmail);
 		request.setAttribute("kakaoId", kakaoId);
 		request.setAttribute("kakaoEmail", kakaoEmail);
+		request.setAttribute("kakaoPass", Utility.getSecureNumberAndString(10, true));
 		
 		request.getRequestDispatcher("/loginapi/kakaoMemberInput.jsp").forward(request, response);
 	}

@@ -11,7 +11,6 @@ import com.takeit.common.JdbcTemplate;
 import com.takeit.model.dto.Item;
 import com.takeit.model.dto.MessageEntity;
 
-
 /**
  * 상품 Item
  * @author 김효원

@@ -1,5 +1,7 @@
 package com.takeit.model.dto;
 
+import java.io.Serializable;
+
 /**
  * <pre>
  * 잇거래 도메인 클래스
@@ -8,7 +10,7 @@ package com.takeit.model.dto;
  * @since jdk1.8
  * @version v2.0
  */
-public class Takeit {
+public class Takeit implements Serializable {
 	/** 잇거래번호 : 필수, 시스템 자동 입력 */
 	private String takeitNo;
 	

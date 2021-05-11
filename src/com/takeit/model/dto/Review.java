@@ -12,7 +12,6 @@ import java.io.Serializable;
  * @version v2.0
  */
 public class Review implements Serializable{
-	
 	/**후기 번호:시스템 자동부여*/
 	private String reviewNo;
 	

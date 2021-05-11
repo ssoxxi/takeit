@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,7 +16,6 @@ import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import com.takeit.common.CommonException;
 import com.takeit.model.biz.ItemBiz;
-import com.takeit.model.biz.MypageBiz;
 import com.takeit.model.dto.Item;
 import com.takeit.model.dto.MessageEntity;
 import com.takeit.model.dto.Paging;

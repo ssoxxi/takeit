@@ -83,10 +83,10 @@ $(document).ready(function() {
 			<hr>
 			<c:choose>
 			<c:when test="${order.orderCancel == 'T' and order.orderCancelReq == 'T'}">
-			<div style="opacity:0.3;">
+				<div style="opacity:0.3;">
 			</c:when>
 			<c:otherwise>
-			<div>
+				<div>
 			</c:otherwise>
 			</c:choose>
 				<div class="order-info">
@@ -134,9 +134,8 @@ $(document).ready(function() {
 				</div>
 				<hr style=" border-top: 1px dashed grey;">
 				</c:forEach>
-			</div>
-		<hr>
 		</c:forEach>
+		<hr>
 	</div>
 </div>
 
