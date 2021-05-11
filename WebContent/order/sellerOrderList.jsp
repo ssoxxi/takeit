@@ -119,7 +119,7 @@ function updateShipStatus(orderNo, shipStatusCode) {
 				<img src="/takeit/img/item/${orderDetail.itemImg}">
 				</div>
 				<div class="order-detail">
-					<span><b>상품명(${orderDetail.itemTakeit == "F" },${(orderDetail.itemPayPrice * orderDetail.itemQty >= 50000) }) :</b>&emsp;&emsp;&emsp;&emsp; ${orderDetail.itemName}</span> <br>
+					<span><b>상품명 :</b>&emsp;&emsp;&emsp;&emsp; ${orderDetail.itemName}</span> <br>
 					<span><b>상품개수 :</b>&emsp;&emsp;&emsp; ${orderDetail.itemQty}개</span> <br>
 					<c:choose>
 						<c:when test='${orderDetail.itemTakeit == "T" }'>
