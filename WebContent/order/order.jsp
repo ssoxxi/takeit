@@ -128,12 +128,12 @@
 		<div id="order-price-area">
 			<c:if test=""></c:if>
 			<span id="order-totPrice">
-				<b>총 주문금액 :</b> 
+				<b>총 주문금액 :${order.itemTakeit}</b> 
 				<span style="font-weight: 700; font-size:35px;  color: red;">&#8361;<fmt:formatNumber value="${order.orderPrice}"  pattern="###,###"/></span> 
 			</span>
 			<input type="submit" class="link" value="결제하기" onclick="return orderCheck()"/>
 			</div>
-<input type="hidden" value="${order.orderPrice}" name="orderPrice">	
+	<input type="hidden" value="${order.orderPrice}" name="orderPrice">	
 	</form>
 </div>
 

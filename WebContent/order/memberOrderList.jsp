@@ -123,7 +123,18 @@ $(document).ready(function() {
 					<div class="order-detail">
 						<span><b>상품명 :</b>&emsp;${orderDetail.itemName}</span><br>
 						<span><b>상품 수량 :</b> &emsp;${orderDetail.itemQty}개</span><br>
-						<span><b>결제금액 :</b> &emsp;<fmt:formatNumber type="number" value="${orderDetail.itemPayPrice * orderDetail.itemQty}"/>원</span><br>
+					<c:choose>
+						<c:when test='${orderDetail.itemTakeit == "T" }'>
+							<span><b>결제금액 :</b> &emsp;<fmt:formatNumber type="number" value="${orderDetail.itemPayPrice * orderDetail.itemQty}"/>원</span><br>
+						</c:when>
+						<c:when test='${orderDetail.itemTakeit == "F" && (orderDetail.itemPayPrice * orderDetail.itemQty >= 50000) }'>
+							<span><b>결제금액 :</b> &emsp;<fmt:formatNumber type="number" value="${orderDetail.itemPayPrice * orderDetail.itemQty}"/>원</span><br>
+						</c:when>
+						<c:otherwise>
+							<span><b>결제금액 :</b> &emsp;<fmt:formatNumber type="number" value="${orderDetail.itemPayPrice * orderDetail.itemQty + 3500}"/>원</span><br>
+						</c:otherwise>
+					</c:choose>
+						
 						<span><b>수령 방법 :</b> &emsp;${order.receiveMethod}</span><br>
 						<span>${order.shopName}(${order.sellerId})</span>
 					</div>

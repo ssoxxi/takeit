@@ -68,7 +68,7 @@
 				<c:otherwise>
 					<span id="cart-shippingFee">3,500원</span><br>
 				</c:otherwise>
-				</c:choose>
+			</c:choose>
 			<b>할인율</b>&emsp;
 			<span id="cart-shippingFee"><%= cart.getDiscRate() %>%</span><br>
 			<b>판매가</b>&emsp;
