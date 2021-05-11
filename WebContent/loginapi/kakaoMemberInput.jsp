@@ -37,7 +37,7 @@
 </table>
 <form action="${CONTEXT_PATH}/member/controller?action=memberInput" method="post">
 <input type="hidden" value="${kakaoId}" name="memberId">
-<input type="hidden" value="${kakaoPass}" name="memberPw">
+<input type="hidden" value="ka${kakaoPass}" name="memberPw">
 <table>
 		<tr>
 			<td>이름<span class="star"> *</span></td>
@@ -53,7 +53,7 @@
 		<tr>
 			<td>휴대폰<span class="star"> *</span></td>
 			<td>
-				<input type="text" id="mobile" placeholder="휴대폰번호를 입력해주세요." id="mobile" name="mobile"  />
+				<input type="text" id="mobile" placeholder="휴대폰번호를 입력해주세요." maxlength="13" id="mobile" name="mobile"  />
 				<input type="button" value="인증번호" id="mobile_button" name="mobile_button" onclick="mobilePopup();"/>
 			</td>
 		</tr>

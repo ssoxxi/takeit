@@ -322,7 +322,6 @@ public class FrontMemberServlet extends HttpServlet {
 	protected void memberIdChk(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String memberId = request.getParameter("memberId");
-		System.out.println("chk"+memberId);
 		memberId = memberId.trim();
 		
 		MemberBiz biz = new MemberBiz();
