@@ -51,7 +51,7 @@ String categoryName = categoryItemList.get(0).getItemCategoryName();
 			<img id="itemListImg" src="/takeit/img/item/${dto.itemImg}">
 		</a>
 		</div>
-		<a href="/takeit/item/itemController?action=itemDetail&itemNo=%{dto.itemNo}">
+		<a href="/takeit/item/itemController?action=itemDetail&itemNo=${dto.itemNo}">
 		<span id="shop-name">[${dto.shopName}]</span><br>
 		<span id="itemLI">${dto.itemName}</span><br>
 		</a>
