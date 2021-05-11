@@ -1,0 +1,7 @@
+com.takeit.common
+com.takeit.controller
+com.takeit.model.biz
+com.takeit.model.dao
+com.takeit.model.dto
+com.takeit.test
+com.takeit.util

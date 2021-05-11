@@ -8,8 +8,6 @@ import java.util.ArrayList;
 
 import com.takeit.common.CommonException;
 import com.takeit.common.JdbcTemplate;
-import com.takeit.model.dto.Board;
-import com.takeit.model.dto.Item;
 import com.takeit.model.dto.MessageEntity;
 import com.takeit.model.dto.Search;
 

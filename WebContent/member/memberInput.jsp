@@ -96,7 +96,7 @@
 		<tr>
 			<td>휴대폰<span class="star"> *</span></td>
 			<td>
-				<input type="text" id="mobile" placeholder="휴대폰번호를 입력해주세요." id="mobile" name="mobile"  />
+				<input type="text" id="mobile" placeholder="휴대폰번호를 입력해주세요." id="mobile" name="mobile" maxlength="13"  />
 				<input type="button" value="인증번호" id="mobile_button" name="mobile_button" onclick="mobilePopup();"/>
 			</td>
 		</tr>

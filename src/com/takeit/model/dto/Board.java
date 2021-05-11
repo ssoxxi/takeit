@@ -12,26 +12,35 @@ import java.io.Serializable;
  * @version v2.0
  */
 public class Board implements Serializable{
-	
 	/** 게시글 번호, 시스템 자동부여, 필수 */
 	private String boardNo;
+	
 	/** 게시글 작성자, session에 저장된 아이디, 필수 */
 	private String boardWriter;
+	
 	/** 게시글 제목, 사용자 입력, 필수 */
 	private String boardTitle;
+	
 	/** 게시글 내용, 사용자입력, 필수 */
 	private String boardContents;
+	
 	/** 게시글 조회수, 시스템 자동부여, 기본값 0 */
 	private int boardViews;
+	
 	/** 게시글 작성일자, 시스템 자동부여, 기본값  0 */
 	private String boardDate;
+	
 	/** 게시글 카테고리 번호, 사용자입력(카테고리명 선택시 번호로 전달), 필수 */
 	private String boardCategory;
+	
 	/** 게시글 카테고리명, 카테고리 번호에 따라 자동 호출, 필수 */
 	private String boardCategoryName;
+	
 	/** 게시글(상품문의 전용) 상품번호, 상품문의에서만 사용자 입력 */
 	private String boardItem;
 
+	
+	/** 기본 생성자 */
 	public Board() {}
 	
 	/***
@@ -85,6 +94,7 @@ public class Board implements Serializable{
 		this.boardDate = boardDate;
 	}
 
+	
 	public String getBoardNo() {
 		return boardNo;
 	}
@@ -155,6 +165,7 @@ public class Board implements Serializable{
 	public void setBoardCategoryName(String boardCategoryName) {
 		this.boardCategoryName = boardCategoryName;
 	}
+	
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
@@ -175,10 +186,4 @@ public class Board implements Serializable{
 		builder.append(boardItem);
 		return builder.toString();
 	}
-
-	
-	
-	
-	
 }
-

@@ -54,7 +54,7 @@
 		<span><b>이름</b>&emsp;&emsp;${order.recipientName}</span><br>
 		<span><b>연락처</b>&emsp;${order.recipientMobile}</span><br>
 		<span><b>주소</b>&emsp;&emsp;${order.recipientAddr}, ${order.recipientAddrDetail} (${order.recipientPostNo})</span>
-	</div>	
+	</div>
 	<hr style="border-top-width: 3px;">
 
 	
@@ -78,7 +78,7 @@
 			<div class="recipient-info" style="margin-left: 10px;">
 
 				<span><input type="text" id="recipientName" name="recipientName"  class="recipient-receiveMethod" value="${order.recipientName}" ></span><br>
-				<span><input type="text" id="recipientMobile" name="recipientMobile"  class="recipient-receiveMethod" value="${order.recipientMobile}" ><span id="mobileResult1" class="orderResult"></span></span><br>
+				<span><input type="text" id="recipientMobile" maxlength="13" name="recipientMobile"  class="recipient-receiveMethod" value="${order.recipientMobile}" ><span id="mobileResult1" class="orderResult"></span></span><br>
 				<span><input type="text" id="recipientPostNo" readonly="readonly"  class="recipient-receiveMethod" name="recipientPostNo" value="${order.recipientPostNo}"></span><input type="button" id="postNoBtn" name="postNoBtn" class="small-btn" onclick="goPopup();" value="주소검색" /> <br>
 				<span><input type="text" id="recipientAddr" readonly="readonly"  name="recipientAddr"  class="recipient-receiveMethod" value="${order.recipientAddr}"><span id="postNoResult1" class="orderResult"></span></span><br>
 				<span><input type="text" id="recipientAddrDetail" required="required" name="recipientAddrDetail"  class="recipient-receiveMethod" value="${order.recipientAddrDetail}"><span id="addressDetailResult1" class="orderResult"></span></span><br>

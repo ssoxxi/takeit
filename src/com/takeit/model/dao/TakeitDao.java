@@ -3,7 +3,6 @@ package com.takeit.model.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -22,7 +21,7 @@ import com.takeit.util.Utility;
  * 잇거래 테이블에 대한 TakeitDao 클래스
  * @author 김태경
  * @since jdk1.8
- * @version v2.0 2015/05/10
+ * @version v2.0 2021/05/10
  */
 public class TakeitDao {
 	private static TakeitDao instance = new TakeitDao();
@@ -767,7 +766,7 @@ public class TakeitDao {
 		try {
 			stmt = conn.prepareStatement(sql);
 			stmt.setString(1, takeit.getShopLocCode());
-			int row = stmt.executeUpdate();
+			stmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
 

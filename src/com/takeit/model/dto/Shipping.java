@@ -1,5 +1,7 @@
 package com.takeit.model.dto;
 
+import java.io.Serializable;
+
 /**
  * <pre>
  * 배송상태 도메인 클래스
@@ -8,7 +10,7 @@ package com.takeit.model.dto;
  * @since jdk1.8
  * @version v2.0
  */
-public class Shipping {
+public class Shipping implements Serializable {
 	/** 배송상태코드 : 필수데이터, 중복불가 , (O-GET, I-GET, I-MOVE, S-ARR, S-GO, DONE) */
 	private String shipStatusCode;
 	

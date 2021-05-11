@@ -125,16 +125,12 @@ $(document).ready(function (){
 		</div>
 		<div class="desc takeit_detail_wrap">
 		
-		
-		
 			<fmt:formatNumber var="itemPrice" value="${takeitItem.itemPrice}" type="number"/>
 			<fmt:formatNumber var="discPrice" value="${takeitItem.itemPrice * (100-takeitItem.discRate) / 100}" type="number"/>
 			<fmt:parseNumber  var="intPrice" value="${(takeitItem.itemPrice * (100-takeitItem.discRate) / 100)/1000}" integerOnly="true"/>
 			<fmt:formatNumber var="takeitItemPrice" value="${intPrice*1000}" type="number"/>
 			<fmt:formatNumber var="itemDiscRate" value="${takeitItem.discRate / 100}" type="percent"/>
 			<fmt:formatNumber var="takeitDisc" value="${(takeitItem.itemPrice * (100-takeitItem.discRate) / 100) - intPrice*1000 }" type="number"/>
-			
-			
 			
 			<ul class="takeit_info">
 				<h2>${takeitItem.itemName} (<span id="takeitFresh" data-takeitexpdate="${takeitItem.freshPercent}"></span>)</h2>
@@ -211,7 +207,7 @@ $(document).ready(function (){
 			</div>
 		</div>
 		<div id="addCart-btn-area">
-			<input type="submit" class="link" value="장바구니 추가" onclick="if(${dto == null}){return true;};if('${takeitItem.shopLocCode}' != '${dto.shopLocCode}'){alert('내 구역 상품만 구매할 수 있습니다'); return false}; return true; "/>
+			<input type="submit" class="link" value="장바구니 추가" onclick="if(${dto == null}){return true;};if('${takeitItem.shopLocCode}' != '${dto.shopLocCode}'){alert('내 구역 상품만 구매할 수 있습니다'); return false}; return true; ">
 		</div>
 	</form>
 	</div>

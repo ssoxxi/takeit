@@ -10,67 +10,67 @@ import java.io.Serializable;
  */
 public class Seller implements Serializable{	
 	
-	/* 아이디 : 필수입력, 중복불가, 6~20자 영문+숫자 조합 */
+	/** 아이디 : 필수입력, 중복불가, 6~20자 영문+숫자 조합 */
 	private String sellerId;
 	
-	/* 비밀번호 : 필수입력, 8~20자 영대소문자+숫자 조합 */
+	/** 비밀번호 : 필수입력, 8~20자 영대소문자+숫자 조합 */
 	private String sellerPw;
 	
-	/* 이름 : 필수입력, 2~6자 한글만 입력 */
+	/** 이름 : 필수입력, 2~6자 한글만 입력 */
 	private String name;
 	
-	/* 휴대폰 : 필수입력, 000-0000-0000 형식에 맞춰 입력 */
+	/** 휴대폰 : 필수입력, 000-0000-0000 형식에 맞춰 입력 */
 	private String mobile;
 	
-	/* 이메일 : 필수입력, 중복불가, takeit@take.com 형식에 맞춰 입력 */	
+	/** 이메일 : 필수입력, 중복불가, takeit@take.com 형식에 맞춰 입력 */	
 	private String email;
 	
-	/* 가입일 : 시스템 부여, yyyy.MM.dd HH:mm:ss 형식, Timestamp */	
+	/** 가입일 : 시스템 부여, yyyy.MM.dd HH:mm:ss 형식, Timestamp */	
 	private String entryDate;
 	
-	/* 우편번호 : 필수입력, api로 데이터를 받아옴 */
+	/** 우편번호 : 필수입력, api로 데이터를 받아옴 */
 	private String postNo;
 	
-	/* 도로명주소 : 필수입력, api로 데이터를 받아옴 */
+	/** 도로명주소 : 필수입력, api로 데이터를 받아옴 */
 	private String address;
 	
-	/* 상세주소 : 필수입력  */
+	/** 상세주소 : 필수입력  */
 	private String addressDetail;
 	
-	/* 등급 : 시스템 부여, 기본값 : S */	
+	/** 등급 : 시스템 부여, 기본값 : S */	
 	private String grade;
 	
-	/* 사업자등록번호 : 필수입력, 중복불가, 000-00-00000 형식에 맞춰 입력 */
+	/** 사업자등록번호 : 필수입력, 중복불가, 000-00-00000 형식에 맞춰 입력 */
 	private String sellerNo;
 	
-	/* 상점연락처 : 필수입력, 000-0000-0000 형식에 맞춰 입력 */
+	/** 상점연락처 : 필수입력, 000-0000-0000 형식에 맞춰 입력 */
 	private String shopMobile;
 	
-	/* 상점명 : 필수입력, 중복불가, 한글+영어+숫자 조합 원하는거 사용 */
+	/** 상점명 : 필수입력, 중복불가, 한글+영어+숫자 조합 원하는거 사용 */
 	private String shopName;
 	
-	/* 고객평점 : 시스템 자동부여, 기본값 : 0.0  */
+	/** 고객평점 : 시스템 자동부여, 기본값 : 0.0  */
 	private double custScore;
 	
-	/* 상점카카오아이디 : 사용자 입력  */
+	/** 상점카카오아이디 : 사용자 입력  */
 	private String shopKakaoId;
 	
-	/* 상점이미지 : 사용자 입력, 이미지업로드 형식  */
+	/** 상점이미지 : 사용자 입력, 이미지업로드 형식  */
 	private String shopImg;
 	
-	/* 상점카테고리번호 : 필수선택, SHOP_CATEGORY에서 받아온 데이터 */
+	/** 상점카테고리번호 : 필수선택, SHOP_CATEGORY에서 받아온 데이터 */
 	private String shopCategoryNo;
 	
-	/* 상점카테고리이름 : 필수선택, SHOP_CATEGORY에서 받아온 데이터 */
+	/** 상점카테고리이름 : 필수선택, SHOP_CATEGORY에서 받아온 데이터 */
 	private String shopCategory;
 	
-	/* 상점카테고리이름 : 필수선택, SHOP_LOC에서 받아온 데이터 */
+	/** 상점카테고리이름 : 필수선택, SHOP_LOC에서 받아온 데이터 */
 	private String shopLocCode;
 	
-	/* 기본 생성자 */
+	/** 기본 생성자 */
 	public Seller() {}
 
-	/* 사용자 입력 데이터 */
+	/**사용자 입력 데이터 */
 	public Seller(String sellerId, String sellerPw, String name, String mobile, String email, String postNo,
 			String address, String addressDetail, String sellerNo, String shopMobile, String shopName,
 			String shopKakaoId, String shopImg, String shopCategoryNo, String shopLocCode) {
@@ -91,7 +91,7 @@ public class Seller implements Serializable{
 		this.shopLocCode = shopLocCode;
 	}
 	
-	/* 전체 데이터 */
+	/** 전체 데이터 */
 	public Seller(String sellerId, String sellerPw, String name, String mobile, String email, String entryDate,
 			String postNo, String address, String addressDetail, String grade, String sellerNo, String shopMobile,
 			String shopName, double custScore, String shopKakaoId, String shopImg, String shopCategoryNo,
@@ -116,7 +116,7 @@ public class Seller implements Serializable{
 		this.shopLocCode = shopLocCode;
 	}
 
-	/* getter, setter */
+	/** getter, setter */
 	public String getSellerId() {
 		return sellerId;
 	}
@@ -281,4 +281,4 @@ public class Seller implements Serializable{
 
 	
 	
-} // Seller 끝
+}

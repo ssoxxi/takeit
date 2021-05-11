@@ -24,6 +24,8 @@ import com.takeit.model.dto.TakeitItem;
 /**
  * 잇거래 요청 컨트롤러
  * @author 김태경
+ * @since jdk1.8
+ * @version v2.0 2021/05/10
  */
 @WebServlet("/takeit/takeitController")
 public class FrontTakeitServlet extends HttpServlet {

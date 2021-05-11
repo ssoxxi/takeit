@@ -10,52 +10,52 @@ import java.io.Serializable;
  */
 public class Member implements Serializable{	
 	
-	/* 아이디 : 필수입력, 중복불가, 6~20자 영문+숫자 조합 */
+	/** 아이디 : 필수입력, 중복불가, 6~20자 영문+숫자 조합 */
 	private String memberId;
 	
-	/* 비밀번호 : 필수입력, 8~20자 영대소문자+숫자 조합 */
+	/** 비밀번호 : 필수입력, 8~20자 영대소문자+숫자 조합 */
 	private String memberPw;
 	
-	/* 이름 : 필수입력, 2~6자 한글만 입력 */
+	/** 이름 : 필수입력, 2~6자 한글만 입력 */
 	private String name;
 	
-	/* 휴대폰 : 필수입력, 000-0000-0000 형식에 맞춰 입력 */
+	/** 휴대폰 : 필수입력, 000-0000-0000 형식에 맞춰 입력 */
 	private String mobile;
 	
-	/* 이메일 : 필수입력, 중복불가, takeit@take.com 형식에 맞춰 입력 */	
+	/** 이메일 : 필수입력, 중복불가, takeit@take.com 형식에 맞춰 입력 */	
 	private String email;
 	
-	/* 가입일 : 시스템 부여, yyyy.MM.dd HH:mm:ss 형식, Timestamp */	
+	/** 가입일 : 시스템 부여, yyyy.MM.dd HH:mm:ss 형식, Timestamp */	
 	private String entryDate;
 	
-	/* 우편번호 : 필수입력, api로 데이터를 받아옴 */
+	/** 우편번호 : 필수입력, api로 데이터를 받아옴 */
 	private String postNo;
 	
-	/* 도로명주소 : 필수입력, api로 데이터를 받아옴 */
+	/** 도로명주소 : 필수입력, api로 데이터를 받아옴 */
 	private String address;
 	
-	/* 상세주소 : 필수입력, api로 데이터를 받아옴 */
+	/** 상세주소 : 필수입력, api로 데이터를 받아옴 */
 	private String addressDetail;
 	
-	/* 적립금 : 시스템 부여, 기본값 : 1000 */
+	/** 적립금 : 시스템 부여, 기본값 : 1000 */
 	private int point;
 	
-	/* 생일 : 사용자 입력, 10자이내 문자열 형식 */
+	/** 생일 : 사용자 입력, 10자이내 문자열 형식 */
 	private String birth;
 	
-	/* 등급 : 시스템 부여, 기본값 : G */
+	/** 등급 : 시스템 부여, 기본값 : G */
 	private String grade; 
 	
-	/* 회원구역번호 : 시스템부여*/
+	/** 회원구역번호 : 시스템부여*/
 	private String memberLocNo;
 
-	/* 상점구역코드 : 시스템부여*/
+	/** 상점구역코드 : 시스템부여*/
 	private String shopLocCode;
 	
-	/* 기본 생성자 */
+	/** 기본 생성자 */
 	public Member() {}
 
-	/* 사용자 입력 데이터 */
+	/** 사용자 입력 데이터 */
 	public Member(String memberId, String memberPw, String name, String mobile, String email, String postNo,
 			String address, String addressDetail, String birth) {
 		super();
@@ -70,7 +70,7 @@ public class Member implements Serializable{
 		this.birth = birth;
 	}
 
-	/* 전체 데이터 */
+	/** 전체 데이터 */
 	public Member(String memberId, String memberPw, String name, String mobile, String email, String entryDate,
 			String postNo, String address, String addressDetail, int point, String birth, String grade,
 			String memberLocNo, String shopLocCode) {
@@ -91,7 +91,7 @@ public class Member implements Serializable{
 		this.shopLocCode = shopLocCode;
 	}
 
-	/* getter, setter */
+	/** getter, setter */
 	public String getMemberId() {
 		return memberId;
 	}

@@ -36,10 +36,8 @@
 		</tr>
 </table>
 <form action="${CONTEXT_PATH}/member/controller?action=memberInput" method="post">
-<%-- <input type="hidden" value="${kakaoId}" name="memberId">
-<input type="hidden" value="${kakaoPass}" name="memberPw"> --%>
 <input type="hidden" value="${kakaoId}" name="memberId">
-<input type="hidden" value="kakaoPass" name="memberPw">
+<input type="hidden" value="${kakaoPass}" name="memberPw">
 <table>
 		<tr>
 			<td>이름<span class="star"> *</span></td>

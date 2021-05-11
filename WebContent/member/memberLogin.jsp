@@ -13,38 +13,31 @@
 <!-- 카카오 스크립트 -->
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <script>
-Kakao.init('ef7d648c9d8cef88d6c092d4942eee41'); //발급받은 키 중 javascript키를 사용해준다.
+Kakao.init('ef7d648c9d8cef88d6c092d4942eee41'); //javascript키
 console.log(Kakao.isInitialized()); // sdk초기화여부판단
 //<!-- 카카오 로그인 -->
-var kakaoId = "";
 function kakaoLogin() {
-	
 	console.log(Kakao.Auth.getAccessToken());
-	console.log("login req");
 	Kakao.Auth.loginForm({
 		scope: 'account_email',
 		success: function (response) {
-		console.log("login succ");
 		Kakao.API.request({
 			url: '/v2/user/me',
 			success: function (response) {
-			kakaoId =""+ response.id;
-			console.log(kakaoId);
 			const kakao_account = response.kakao_account;
 			$.ajax({	
 				url:"/takeit/member/controller?action=memberIdChk",
 				type:"post",
 				data:{
-					"memberId" : ""+kakaoId
+					"memberId" : response.id
 				},	
 				success:function(data){
 					console.log(kakaoId);
 					if(data == "1"){
 						alert("회원가입이 필요합니다!!!");
 						$("#kakaoEmail").val(kakao_account.email);
-						$("#kakaoIdInput").val(""+kakaoId);
+						$("#kakaoIdInput").val(response.id);
 						$("#kakaoInputForm").submit();
-        					
        				} else {					
 						$("#kakaoId").val(response.id);
 						$("#kakaoLoginForm").submit();
@@ -66,7 +59,6 @@ function kakaoLogin() {
   }
 </script>
 </head>
-
 
 <body>
 <!-- 상단 메뉴 -->
