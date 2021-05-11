@@ -89,6 +89,9 @@
 				<c:when test='<%= cart.getItemTakeit().equals("T") %>'>
 					<b>결제금액</b>&emsp;<span id="cart-totPrice"><c:set var="itemTotalPrice" value="<%= cart.getDiscPrice()*cart.getCartItemQty() %>" />
 				</c:when>
+				<c:when test='<%= cart.getItemTakeit().equals("F") && (cart.getDiscPrice()*cart.getCartItemQty() >=50000) %>'>
+					<b>결제금액</b>&emsp;<span id="cart-totPrice"><c:set var="itemTotalPrice" value="<%= cart.getDiscPrice()*cart.getCartItemQty() %>" />
+				</c:when>
 				<c:otherwise>
 					<b>결제금액</b>&emsp;<span id="cart-totPrice"><c:set var="itemTotalPrice" value="<%= cart.getDiscPrice()*cart.getCartItemQty()+3500 %>" />
 				</c:otherwise>
@@ -106,11 +109,13 @@
 				<c:when test='<%= cart.getItemTakeit().equals("T") %>'>
 					<input type="hidden" value="<%= cart.getDiscPrice()*cart.getCartItemQty() %>" name="cartTotalPrice" id="cartTotalPrice"> 	
 				</c:when>
+				<c:when test='<%= cart.getItemTakeit().equals("F") && (cart.getDiscPrice()*cart.getCartItemQty() >=50000) %>'>
+					<input type="hidden" value="<%= cart.getDiscPrice()*cart.getCartItemQty() %>" name="cartTotalPrice" id="cartTotalPrice"> 	
+				</c:when>
 				<c:otherwise>
 					<input type="hidden" value="<%= cart.getDiscPrice()*cart.getCartItemQty()+3500 %>" name="cartTotalPrice" id="cartTotalPrice"> 	
 				</c:otherwise>
 				</c:choose>
-				
 							
 				
 				<input type="submit" value="구매" class="small-btn" style="margin-bottom: 10px;">
