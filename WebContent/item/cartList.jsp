@@ -92,7 +92,7 @@
 				<c:otherwise>
 					<b>결제금액</b>&emsp;<span id="cart-totPrice"><c:set var="itemTotalPrice" value="<%= cart.getDiscPrice()*cart.getCartItemQty()+3500 %>" />
 				</c:otherwise>
-			</c:choose>
+				</c:choose>
 				&#8361;<fmt:formatNumber value="${itemTotalPrice}" pattern="###,###"/> 
 				</span>
 			</div><br>
@@ -100,8 +100,18 @@
 				<input type="hidden" value="<%=cart.getItemNo()%>" name="itemNo"> 
 				<input type="hidden" value="<%=cart.getCartItemQty()%>" name="itemQty" > 
 				<input type="hidden" value="${discPrice}" name="itemPrice" > 
-				<input type="hidden" value="${cart.discPrice}" name="totalPrice" > 
-				<input type="hidden" value="<%= cart.getDiscPrice()*cart.getCartItemQty()+3500 %>" name="cartTotalPrice" id="cartTotalPrice"> 				
+				<input type="hidden" value="${cart.discPrice}" name="totalPrice" >
+				
+				<c:choose>
+				<c:when test='<%= cart.getItemTakeit().equals("T") %>'>
+					<input type="hidden" value="<%= cart.getDiscPrice()*cart.getCartItemQty() %>" name="cartTotalPrice" id="cartTotalPrice"> 	
+				</c:when>
+				<c:otherwise>
+					<input type="hidden" value="<%= cart.getDiscPrice()*cart.getCartItemQty()+3500 %>" name="cartTotalPrice" id="cartTotalPrice"> 	
+				</c:otherwise>
+				</c:choose>
+				
+							
 				
 				<input type="submit" value="구매" class="small-btn" style="margin-bottom: 10px;">
 			</form>
