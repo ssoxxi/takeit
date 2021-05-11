@@ -27,7 +27,7 @@ function orderCancelRequest(orderNo) {
 				$("#"+orderNo+"can").attr("disabled", true);
 				$("#"+orderNo+"message").html("(취소요청)");
 			} else {
-				alert("취소요청 실패");
+				alert("취소요청 실패"); 
 			}
 		}
 	});
@@ -134,11 +134,11 @@ $(document).ready(function() {
 				</div>
 				<hr style=" border-top: 1px dashed grey;">
 				</c:forEach>
+			</div>
 		</c:forEach>
 		<hr>
 	</div>
 </div>
-
 <!-- floating Banner -->
 <jsp:include page="/common/floatingBanner.jsp"></jsp:include>
  <!-- scroll function -->
