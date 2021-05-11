@@ -139,7 +139,6 @@ $(document).ready(function() {
 		<hr>
 	</div>
 </div>
-
 <!-- floating Banner -->
 <jsp:include page="/common/floatingBanner.jsp"></jsp:include>
  <!-- scroll function -->
